@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ASCII"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" size="640,755" id="leopinolpinoFCE2" metadata="nsuml-1.4" initialized="true" showWireOptions="5">
+  <children xsi:type="editmodel:InterfaceEditModel" location="295,361" size="157,171" id="leopinolpinoFCE916" runTimeClassModel="leopinolpinoFCE918;leopinolpinoFCE930;leopinolpinoFCE927;leopinolpinoFCE924;leopinolpinoFCE922;leopinolpinoFCE920">
+    <children xsi:type="editmodel:CompartmentEditModel" viewSorter="Name"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="101,108" viewSorter="Name">
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE918"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE920"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE924"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE922"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE927"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE930"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" viewSorter="Name"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="50,600" size="169,135" id="leopinolpinoFCE852" runTimeClassModel="leopinolpinoFCE858;leopinolpinoFCE856;leopinolpinoFCE854;leopinolpinoFCE861">
+    <children xsi:type="editmodel:CompartmentEditModel" viewSorter="Name"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="101,72" viewSorter="Name">
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE854"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE856"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE858"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE861"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" viewSorter="Name"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="50,50" size="150,261" id="leopinolpinoFCE454" runTimeClassModel="leopinolpinoFCE823;leopinolpinoFCE821;leopinolpinoFCE844;leopinolpinoFCE841;leopinolpinoFCE838;leopinolpinoFCE835;leopinolpinoFCE833;leopinolpinoFCE829;leopinolpinoFCE831;leopinolpinoFCE827;leopinolpinoFCE825">
+    <children xsi:type="editmodel:CompartmentEditModel" viewSorter="Name"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="110,198" viewSorter="Name">
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE821"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE823"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE825"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE827"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE829"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE831"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE833"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE835"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE844"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE838"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE841"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" viewSorter="Name"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="250,50" size="173,225" id="leopinolpinoFCE936" runTimeClassModel="leopinolpinoFCE956;leopinolpinoFCE953;leopinolpinoFCE949;leopinolpinoFCE951;leopinolpinoFCE947;leopinolpinoFCE945;leopinolpinoFCE942;leopinolpinoFCE938;leopinolpinoFCE940">
+    <children xsi:type="editmodel:CompartmentEditModel" viewSorter="Name"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="95,162" viewSorter="Name">
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE938"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE940"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE942"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE945"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE947"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE949"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE951"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE953"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE956"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" viewSorter="Name"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="50,361" size="195,189" id="leopinolpinoFCE960" runTimeClassModel="leopinolpinoFCE967;leopinolpinoFCE965;leopinolpinoFCE976;leopinolpinoFCE974;leopinolpinoFCE962;leopinolpinoFCE972;leopinolpinoFCE969">
+    <children xsi:type="editmodel:CompartmentEditModel" viewSorter="Name"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="113,126" viewSorter="Name">
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE962"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE965"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE969"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE967"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE972"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE974"/>
+      <children xsi:type="editmodel:MethodEditModel" id="leopinolpinoFCE976"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" viewSorter="Name"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showInterfaceStereotype="true" showClassStereotype="true" showPackageStereotype="true"/>
+</editmodel:ClassDiagramEditModel>
