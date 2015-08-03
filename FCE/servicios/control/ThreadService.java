@@ -63,7 +63,7 @@ public class ThreadService {
 					//hecha en la lista de servicios en el XML
 					key = programa.getNextService(lastkey);
 				data.logs.debug("0.5  El servicio a usarse es: " + key + " El servicio anterior fue: " + lastkey);
-				data.logs.info("Invocando servicio " + key);
+				data.logs.debug("Invocando servicio " + key);
 				lastkey = key;
 				servicio = (servicios.control.Service) servicios.get(key);
 				if(servicio == null)
@@ -85,7 +85,7 @@ public class ThreadService {
 						data.logs.debug("4.1.  Instanciando la clase " + servicio.getClaseNegocios() + " del servicio " + servicio.getServicio());
 						businessObject = (servicios.wsapi.BusinessObjectInterface) cl.loadClass(servicio.getClaseNegocios()).newInstance();
 						data.logs.debug("4.2. Instanciacion del objeto de negocios " + servicio.getClaseNegocios() + " del servicio " + servicio.getServicio());
-						data.logs.info("Usando clase de negocios: " + servicio.getClaseNegocios());
+						data.logs.debug("Usando clase de negocios: " + servicio.getClaseNegocios());
 						//Los siguiente se ejecuta solo si el objeto de negocios extiende la clase BusinessObjectClass
 						if(businessObject instanceof servicios.wsapi.BusinessObjectClass){
 							((servicios.wsapi.BusinessObjectClass)businessObject).setThreadParams(req,res);
@@ -122,7 +122,7 @@ public class ThreadService {
 						if (key == null || (!businessObject.getJspAkaPage().equalsIgnoreCase("") && businessObject.getJspAkaPage() != null))
 							//Si se devuelve una llave nula pero sin JSP distinto(vacio o nulo), no se cambia el JSP de salida
 							if(!businessObject.getJspAkaPage().equalsIgnoreCase("")){
-								data.logs.info("Se configura el JSP " + businessObject.getJspAkaPage() + " para ser llamado. La clase de negocios es  " + servicio.getClaseNegocios() );
+								data.logs.debug("Se configura el JSP " + businessObject.getJspAkaPage() + " para ser llamado. La clase de negocios es  " + servicio.getClaseNegocios() );
 								paginaRetorno = businessObject.getJspAkaPage();
 							}
 					}
@@ -163,7 +163,7 @@ public class ThreadService {
 					data.logs.debug("5.1.  Instanciando la clase " + programa.getObjetoControl() + " del programa " + programa.getNombre());
 					businessObject = (servicios.wsapi.FceObjectInterface) cl.loadClass(programa.getObjetoControl()).newInstance();
 					data.logs.debug("5.2. Instanciacion del objeto de negocios " + programa.getObjetoControl() + " del programa " + programa.getNombre());
-					data.logs.info("Usando clase de negocios: " + programa.getObjetoControl());
+					data.logs.debug("Usando clase de negocios: " + programa.getObjetoControl());
 					businessObject.init();
 					businessObject.getContext(req);
 					//Usa la excepcion como variable para poder hacer algo interno con ella
@@ -172,7 +172,7 @@ public class ThreadService {
 					if ((!businessObject.getJspAkaPage().equalsIgnoreCase("") && businessObject.getJspAkaPage() != null))
 						//Si se devuelve una llave nula pero sin JSP distinto(vacio o nulo), no se cambia el JSP de salida
 						if(!businessObject.getJspAkaPage().equalsIgnoreCase("")){
-							data.logs.info("Se configura el JSP " + businessObject.getJspAkaPage() + " para ser llamado. La clase de negocios es de control de errores ");
+							data.logs.debug("Se configura el JSP " + businessObject.getJspAkaPage() + " para ser llamado. La clase de negocios es de control de errores ");
 							paginaRetorno = businessObject.getJspAkaPage();
 						}
 				}
@@ -207,22 +207,22 @@ public class ThreadService {
 	 * Creation date: (13-11-2000 02:03:14 PM)
 	 * @return java.lang.String
 	 * 	Retorna el ALIAS de la pagina JSP de salida de este programa
-	 * 05-01-2001:	Modifica la logica para soportar la paginación
-	 * 11-01-2001:	Agrega el bean de paginación
-	 * 11-02-2001:	Correccion de la asignación de pagina actual
+	 * 05-01-2001:	Modifica la logica para soportar la paginaciï¿½n
+	 * 11-01-2001:	Agrega el bean de paginaciï¿½n
+	 * 11-02-2001:	Correccion de la asignaciï¿½n de pagina actual
 	 * 14-02-2001:	Logica para evitar usar el mismo paginador
 	 * 07-03-2001:	Modifica la forma en que registra el log de los errores
-	 * 23-04-2001:	Corrige la instanciación de la clase ProgRequest para evitar errores de concurrencia
+	 * 23-04-2001:	Corrige la instanciaciï¿½n de la clase ProgRequest para evitar errores de concurrencia
 	 * 09-09-2003:	Permite que el nombre del programa venga como atributo del request
 	 * 07-01-2004:	Simplifica logs
 	 * 19-03-2004:	Elimina el uso del metodo getParameter y ahora solo usa el que provee el request
 	 * 18-03-2004:	Errores desconocidos no se convierten a WSException, evitando perder el stack real del error
-	 * 04-08-2004:	En la paginación evita generar la sesion todo el tiempo y recicla la ya existente
+	 * 04-08-2004:	En la paginaciï¿½n evita generar la sesion todo el tiempo y recicla la ya existente
 	 * 23-03-2005:	Saca el codigo de registro de identificar el thread para este metodo
 	 * 						Registra la sesion que se invalida
 	 * 11-07-2005:	Cambia la forma de retornar el alias a la pagina siguiente. Ya no usa directamente
 	 * 					el atributo del programa si no que una variable
-	 * 15-07-2005:	Agrega revisión de seguridad via la nueva Interface de seguridad
+	 * 15-07-2005:	Agrega revisiï¿½n de seguridad via la nueva Interface de seguridad
 	 * 10-12-2006:	Incorpora soporte para utilizar Hibernate directamente
 	 * 18-12-2006:	Valida el uso de Hibernate
 	 */
@@ -276,9 +276,9 @@ public class ThreadService {
 				data.logs.debug("0.1.  Instanciando la clase " + programa.getObjetoSeguridad() + " del programa " + programa.getNombre());
 				securityObject = (FceSecurityInterface) Class.forName(programa.getObjetoSeguridad()).newInstance();
 				data.logs.debug("0.2. Instanciacion del objeto de negocios " + programa.getObjetoSeguridad()+ " del programa " + programa.getNombre());
-				data.logs.info("Usando clase de seguridad: " + programa.getObjetoSeguridad());
+				data.logs.debug("Usando clase de seguridad: " + programa.getObjetoSeguridad());
 				securityObject.setData(req);
-				//Si el programa no es seguro entonces cambia la pantalla de error y registra la información en un log
+				//Si el programa no es seguro entonces cambia la pantalla de error y registra la informaciï¿½n en un log
 				if(!securityObject.isProgramSecure()){
 					securityObject.writeLog();
 					WSException e = new WSException("VIOLACION DE SEGURIDAD!");
@@ -286,7 +286,7 @@ public class ThreadService {
 					throw e;
 				}
 			}
-			data.logs.info("Ejecutando programa "+ programName);
+			data.logs.debug("Ejecutando programa "+ programName);
 			if (!programa.generaPaginas()) {
 				cicloServicios(req, programa);
 			}
@@ -343,8 +343,8 @@ public class ThreadService {
 	 * Creation date: (11-09-2000 11:26:10 AM)
 	 * Autor: Leonardo Pino
 	 * @param req javax.servlet.RequestDispatcher
-	 * 26-12-2005:	Verifica el resultado de la ejecución y ejecuta el procesamiento de XSL si es necesario
-	 * 04-01-2006: Completa el código para parsear los XSL y convertirlos en HTML, ademas de agregar el control de errores
+	 * 26-12-2005:	Verifica el resultado de la ejecuciï¿½n y ejecuta el procesamiento de XSL si es necesario
+	 * 04-01-2006: Completa el cï¿½digo para parsear los XSL y convertirlos en HTML, ademas de agregar el control de errores
 	 * 06-07-2006:	Verifica la existencia de la lista de XSL antes de revisar la lista. Esto evita errores con versiones viejas de FCE
 	 * 09-01-2007:	Completa el manejo de la sesion de hibernate. Agrega mensajes de debug para verificar estado de la sesion
 	 * 26-07-2012: Incorpora los formatos de salida HTML y JSON
@@ -357,13 +357,13 @@ public class ThreadService {
 		else if(req.getAttribute("fmtSalida") != null)
 			salida = (String)req.getAttribute("fmtSalida");
 			
-		//Si la salida es formateada por XSL (verifica primero que tenga lista de XSLs) y la pagina existe entonces se procesa la información XML
+		//Si la salida es formateada por XSL (verifica primero que tenga lista de XSLs) y la pagina existe entonces se procesa la informaciï¿½n XML
 		//las fuentes del XML puede ser cualquier objeto dentro del request
 		if(data.getListaXsl() != null && data.getListaXsl().containsKey(aux) && (salida.equalsIgnoreCase("xsl") || salida.equalsIgnoreCase("pdf"))){
 			//Procesa el XSL y lo transforma en HTML
-			data.logs.info("Procesando archivo XML");
+			data.logs.debug("Procesando archivo XML");
 			if(this.data.getListaXsl().get(aux) == null){
-				throw new WSException("Clase: ThreadService - Error: No existe XSL " + aux + "  en la lista de páginas del pagemapping.xml");
+				throw new WSException("Clase: ThreadService - Error: No existe XSL " + aux + "  en la lista de pï¿½ginas del pagemapping.xml");
 			}
 			if(this.getBoResponse() != null){
 				if(salida.equalsIgnoreCase("xsl")){
