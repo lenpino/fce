@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Hashtable;
 
 /**
- * Bean para paginaciÛn de bean de resultados.
- * @author: Iv·n PÈrez
+ * Bean para paginaci√≥n de bean de resultados.
+ * @author: Iv√°n P√©rez
  * @modified: Leonardo Pino
  * 12-01-2001:	Agrega metodo de inicializacion y variable de instancia program. Ademas
  *				modifica los metodos que crean los links para incluir el nombre del programa
@@ -28,25 +28,25 @@ public class BeanPaginacion implements Serializable{
 	protected java.lang.String beanName = "";
 	protected java.lang.String prgName = "";
 		
-	// LÌneas que se mostrar·n por cada p·gina.
+	// L√≠neas que se mostrar√°n por cada p√°gina.
 	protected int lineasPorPagina = 0;
 
-	// Indica la p·gina actual a mostrar.
+	// Indica la p√°gina actual a mostrar.
 	protected int paginaActual = 0;
 
-	// Contador de p·gina para mostrar los rangos.
+	// Contador de p√°gina para mostrar los rangos.
 	protected int contPagina;
 
-	// Contador de lÌnea para mostrar los datos.
+	// Contador de l√≠nea para mostrar los datos.
 	protected int contLinea;
 
 	// Columna del ResultSet que se muestra como etiqueta en los rangos.
 	protected int columnaParaRango;
 
-	// Nombre el par·metro en que va la p·gina escogida.
+	// Nombre el par√°metro en que va la p√°gina escogida.
 	protected String nombreParam = "pagina";
 
-	// Nombre de las im·genes para p·gina anterior/siguiente.
+	// Nombre de las im√°genes para p√°gina anterior/siguiente.
 	protected String pagAntAct = null;
 	protected String pagSigAct = null;
 	protected String pagAntInact = null;
@@ -66,8 +66,8 @@ public BeanPaginacion() {
 	nombreParam = "pagina";
 }
 /**
- * Este mÈtodo deberÌa redefinirse en clases hija que deseen aplicar
- * alg˙n formato a los lÌmites de los rangos de la p·gina.
+ * Este m√©todo deber√≠a redefinirse en clases hija que deseen aplicar
+ * alg√∫n formato a los l√≠mites de los rangos de la p√°gina.
  * @return java.lang.String
  * @param valor java.lang.String
  */
@@ -166,13 +166,13 @@ public final void getNextRow() throws ArrayIndexOutOfBoundsException {
 	if (result == null)
 		throw new ArrayIndexOutOfBoundsException();
 
-	// Si se pasÛ el final del RS, se arroja ArrayIndexOutOfBoundsException().
+	// Si se pas√≥ el final del RS, se arroja ArrayIndexOutOfBoundsException().
 	if (contLinea + contPagina * lineasPorPagina >= largoRS)
-		throw new ArrayIndexOutOfBoundsException("Se pasÛ el final del ResultSet.");
+		throw new ArrayIndexOutOfBoundsException("Se pas√≥ el final del ResultSet.");
 
-	// Se avanza el cursor, y se verifica que no se haya pasado del final de la p·gina.
+	// Se avanza el cursor, y se verifica que no se haya pasado del final de la p√°gina.
 	if (++contLinea > lineasPorPagina)
-		throw new ArrayIndexOutOfBoundsException("Fuera del rango de la p·gina en el ResultSet.");
+		throw new ArrayIndexOutOfBoundsException("Fuera del rango de la p√°gina en el ResultSet.");
 }
 /**
  * Insert the method's description here.
@@ -279,8 +279,8 @@ public final String getRango() {
 	int finRango;
 	try {
 
-		// Se calcula la ˙ltima fila del rango actual (si el el ˙ltimo rango podrÌa
-		// que no sea el n˙mero de lÌneas por p·gina predeterminado, sino que menor).
+		// Se calcula la √∫ltima fila del rango actual (si el el √∫ltimo rango podr√≠a
+		// que no sea el n√∫mero de l√≠neas por p√°gina predeterminado, sino que menor).
 		if (contPagina * lineasPorPagina > largoRS)
 			finRango = largoRS;
 		else
@@ -294,16 +294,16 @@ public final String getRango() {
 			linkRango.append("&tdms=").append(System.currentTimeMillis()).append("\">");
 		}
 
-		// El rango de valores. Con el mÈtodo setColumnaEnRango() se puede definir
-		// cual de las columnas es la que se usar· como lÌmites a mostrar de los
-		// rangos. Si estos valores requieren alg˙n tratamiento especial, en la
-		// clase hija de esta se puede redefinir el mÈtodo formateaColumnaRango() por
-		// lo que se desee. Obviamente, el ResultSet que se entregue deberÌa estar
-		// ordenado por la columna que aquÌ se especifique.
+		// El rango de valores. Con el m√©todo setColumnaEnRango() se puede definir
+		// cual de las columnas es la que se usar√° como l√≠mites a mostrar de los
+		// rangos. Si estos valores requieren alg√∫n tratamiento especial, en la
+		// clase hija de esta se puede redefinir el m√©todo formateaColumnaRango() por
+		// lo que se desee. Obviamente, el ResultSet que se entregue deber√≠a estar
+		// ordenado por la columna que aqu√≠ se especifique.
 		linkRango.append(formateaColumnaRango(result.getObject((contPagina - 1) * lineasPorPagina + 1, columnaParaRango).toString()));
 
-		// Si el inicio del rango es igual al fin (por ej. la ˙ltima p·gina
-		// tiene sÛlo un elemento para mostrar), basta con un sÛlo valor.
+		// Si el inicio del rango es igual al fin (por ej. la √∫ltima p√°gina
+		// tiene s√≥lo un elemento para mostrar), basta con un s√≥lo valor.
 		if (finRango != contPagina * lineasPorPagina + 1)
 			linkRango.append('-').append(formateaColumnaRango(result.getObject(finRango, columnaParaRango).toString()));
 
@@ -322,8 +322,8 @@ public final String getRangoParams(String parametros) {
 	int finRango;
 	try {
 
-		// Se calcula la ˙ltima fila del rango actual (si el el ˙ltimo rango podrÌa
-		// que no sea el n˙mero de lÌneas por p·gina predeterminado, sino que menor).
+		// Se calcula la √∫ltima fila del rango actual (si el el √∫ltimo rango podr√≠a
+		// que no sea el n√∫mero de l√≠neas por p√°gina predeterminado, sino que menor).
 		if (contPagina * lineasPorPagina > largoRS)
 			finRango = largoRS;
 		else
@@ -337,16 +337,16 @@ public final String getRangoParams(String parametros) {
 			linkRango.append("&tdms=").append(System.currentTimeMillis()).append(parametros).append("\">");
 		}
 
-		// El rango de valores. Con el mÈtodo setColumnaEnRango() se puede definir
-		// cual de las columnas es la que se usar· como lÌmites a mostrar de los
-		// rangos. Si estos valores requieren alg˙n tratamiento especial, en la
-		// clase hija de esta se puede redefinir el mÈtodo formateaColumnaRango() por
-		// lo que se desee. Obviamente, el ResultSet que se entregue deberÌa estar
-		// ordenado por la columna que aquÌ se especifique.
+		// El rango de valores. Con el m√©todo setColumnaEnRango() se puede definir
+		// cual de las columnas es la que se usar√° como l√≠mites a mostrar de los
+		// rangos. Si estos valores requieren alg√∫n tratamiento especial, en la
+		// clase hija de esta se puede redefinir el m√©todo formateaColumnaRango() por
+		// lo que se desee. Obviamente, el ResultSet que se entregue deber√≠a estar
+		// ordenado por la columna que aqu√≠ se especifique.
 		linkRango.append(formateaColumnaRango(result.getObject((contPagina - 1) * lineasPorPagina + 1, columnaParaRango).toString()));
 
-		// Si el inicio del rango es igual al fin (por ej. la ˙ltima p·gina
-		// tiene sÛlo un elemento para mostrar), basta con un sÛlo valor.
+		// Si el inicio del rango es igual al fin (por ej. la √∫ltima p√°gina
+		// tiene s√≥lo un elemento para mostrar), basta con un s√≥lo valor.
 		if (finRango != contPagina * lineasPorPagina + 1)
 			linkRango.append('-').append(formateaColumnaRango(result.getObject(finRango, columnaParaRango).toString()));
 
@@ -377,7 +377,7 @@ public final void inicializaContadores() {
  * Creation date: (12-01-2001 09:37:26 AM)
  * @param pageParams servicios.control.PageData
  */
-public void init(javax.servlet.http.HttpServletRequest req, servicios.control.PageData pageParams) {
+public void init(jakarta.servlet.http.HttpServletRequest req, servicios.control.PageData pageParams) {
 	setBeanName(pageParams.getBeanPaginado());
 	setPrgName(req.getParameter("reqName"));
 	initParamVals(req.getParameterNames(),req);
@@ -396,7 +396,7 @@ public void init(javax.servlet.http.HttpServletRequest req, servicios.control.Pa
  * Creation date: (14-02-2001 03:21:01 PM)
  * @param parametros java.util.Enumeration
  */
-private void initParamVals(java.util.Enumeration paramsName, javax.servlet.http.HttpServletRequest request) {
+private void initParamVals(java.util.Enumeration paramsName, jakarta.servlet.http.HttpServletRequest request) {
 	java.util.Properties parametros;
 	String nombre;
 	String valorSeleccion;
@@ -413,9 +413,9 @@ private void initParamVals(java.util.Enumeration paramsName, javax.servlet.http.
  * Insert the method's description here.
  * Creation date: (14-02-2001 03:44:48 PM)
  * @return boolean
- * @param req javax.servlet.http.HttpServletRequest
+ * @param req jakarta.servlet.http.HttpServletRequest
  */
-public boolean mismosParams(javax.servlet.http.HttpServletRequest req) {
+public boolean mismosParams(jakarta.servlet.http.HttpServletRequest req) {
 	java.util.Enumeration enumeracion;
 	String nomParam;
 	String valorSeleccion;
@@ -513,16 +513,16 @@ public final void setResultSet(servicios.generales.GenOutBean rs) {
 }
 protected final java.lang.Object valueAtColumn(int column) throws java.lang.ArrayIndexOutOfBoundsException {
 
-	// Comprueba si es RS es null para generar una excepciÛn.
+	// Comprueba si es RS es null para generar una excepci√≥n.
 	if (result == null)
-		throw new java.lang.ArrayIndexOutOfBoundsException("ResultSet est· vacÌo.");
+		throw new java.lang.ArrayIndexOutOfBoundsException("ResultSet est√° vac√≠o.");
 	try {
 
-		// Se comprueba si se saliÛ del rango de la p·gina actual.
+		// Se comprueba si se sali√≥ del rango de la p√°gina actual.
 		if (contLinea > lineasPorPagina)
-			throw new java.lang.ArrayIndexOutOfBoundsException("Fuera del rango de la p·gina en el ResultSet.");
+			throw new java.lang.ArrayIndexOutOfBoundsException("Fuera del rango de la p√°gina en el ResultSet.");
 
-		// Retorna el elemento correspondiente al nuevo Ìndice.
+		// Retorna el elemento correspondiente al nuevo √≠ndice.
 		return result.getObject(contLinea + paginaActual * lineasPorPagina, column);
 	}
 	catch (java.sql.SQLException e) {

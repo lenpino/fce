@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 /**
  * Insert the type's description here.
@@ -15,9 +15,9 @@ import javax.servlet.ServletContext;
  * 08-08-2003:	Agrega objeto ServletConfig a la sesion si el usuario se logea
  */
 public class Login implements servicios.wsapi.ETCBeanInterface {
-	protected javax.servlet.http.HttpServletRequest request;
-	protected javax.servlet.http.HttpSession session;
-	protected javax.servlet.ServletConfig servletConfig;
+	protected jakarta.servlet.http.HttpServletRequest request;
+	protected jakarta.servlet.http.HttpSession session;
+	protected jakarta.servlet.ServletConfig servletConfig;
 	public final static String FS = System.getProperty("file.separator");
 /**
  * Login constructor comment.
@@ -76,19 +76,19 @@ public void execute() throws servicios.generales.WSException{
 		//Se copia la lista de pools de conexiones a la(s) BD(s) si se requiere usar en
 		//los objetos de negocio
 		session.setAttribute("pools", getRequest().getAttribute("pools"));
-		//Crea la lista de parametros propios de la aplicación y los coloca en la sesion
-		if(this.servletConfig.getInitParameter("parametros") != null)
-			session.setAttribute("params", getAppParams(contexto.getRealPath(this.servletConfig.getInitParameter("parametros"))));
-	}
-	catch (Exception e) {
-		throw new servicios.generales.WSException("Error en la configuracion de la sesion");
-	}
-}
+ * @return jakarta.servlet.http.HttpServletRequest
+public jakarta.servlet.http.HttpServletRequest getRequest() {
+ * @return jakarta.servlet.http.HttpSession
+public jakarta.servlet.http.HttpSession getSession() {
+	this.servletConfig = (jakarta.servlet.ServletConfig)parametros;
+public void setContext(jakarta.servlet.http.HttpServletRequest req) {
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
+public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
 /**
  * Insert the method's description here.
- * Creation date: (13-11-2000 05:26:32 PM)
- * @return javax.servlet.http.HttpServletRequest
- */
+ * @param newSession jakarta.servlet.http.HttpSession
+public void setSession(jakarta.servlet.http.HttpSession newSession) {
+* @param newSession jakarta.servlet.http.HttpSession
 public javax.servlet.http.HttpServletRequest getRequest() {
 	return request;
 }

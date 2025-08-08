@@ -7,9 +7,9 @@ package servicios.mensajeria;
  */
 public class CtrlServiceMsg implements servicios.wsapi.CtrlServiceInterface {
 	protected java.lang.String fileXML = "";
-	private javax.servlet.ServletConfig servletConfig = null;
+	private jakarta.servlet.ServletConfig servletConfig = null;
 	private java.lang.String tipoBean = "";
-	protected javax.servlet.http.HttpServletRequest request = null;
+	protected jakarta.servlet.http.HttpServletRequest request = null;
 	protected servicios.generales.OutputServiceBean resultado;
 	protected servicios.mensajeria.TemplateMessage templateMsg = null;
 	protected MsgTemplateReader lectorMsg;
@@ -25,13 +25,13 @@ public CtrlServiceMsg() {
 @Override
 public void execute() throws servicios.generales.WSException {}
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (17-11-2000 00:38:06)
- * @return java.lang.String
+ * @param request jakarta.servlet.http.HttpServletRequest
+public String getParameter(jakarta.servlet.http.HttpServletRequest request, String parameterName, boolean checkRequestParameters, boolean checkInitParameters, boolean isParameterRequired, String defaultValue) throws java.lang.Exception {
+ * @return jakarta.servlet.http.HttpServletRequest
  */
-public String getFileXML() {
-	return fileXML;
-}
+public jakarta.servlet.http.HttpServletRequest getRequest() {
+ * @return jakarta.servlet.ServletConfig
+public jakarta.servlet.ServletConfig getServletConfig() {
 /**
  * Insert the method's description here.
  * Creation date: (27-11-2000 02:43:34 PM)
@@ -41,8 +41,8 @@ public MsgTemplateReader getLectorMsg() {
 	return lectorMsg;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (17-11-2000 00:45:03)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (17-11-2000 00:45:03)
  * @return java.lang.String
  * @param request javax.servlet.http.HttpServletRequest
  * @param parameterName java.lang.String
@@ -50,7 +50,7 @@ public MsgTemplateReader getLectorMsg() {
  * @param checkInitParameter java.lang.Boolean
  * @param isParameterRequired java.lang.Boolean
  * @param defaultValue java.lang.String
- * @exception java.lang.Exception La descripción de excepción.
+ * @exception java.lang.Exception La descripciÃ³n de excepciÃ³n.
  */
 public String getParameter(javax.servlet.http.HttpServletRequest request, String parameterName, boolean checkRequestParameters, boolean checkInitParameters, boolean isParameterRequired, String defaultValue) throws java.lang.Exception {
 
@@ -76,16 +76,16 @@ public String getParameter(javax.servlet.http.HttpServletRequest request, String
 	return paramValue;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (17-11-2000 01:05:54)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (17-11-2000 01:05:54)
  * @return javax.servlet.http.HttpServletRequest
  */
 public javax.servlet.http.HttpServletRequest getRequest() {
 	return request;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (19-11-2000 18:09:13)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (19-11-2000 18:09:13)
  * @return servicios.basedatos.ResultSetService
  */
 @Override
@@ -93,24 +93,24 @@ public Object getResultado() {
 	return resultado;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (17-11-2000 00:48:38)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (17-11-2000 00:48:38)
  * @return javax.servlet.ServletConfig
  */
 public javax.servlet.ServletConfig getServletConfig() {
 	return servletConfig;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (19-11-2000 19:11:39)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (19-11-2000 19:11:39)
  * @return servicios.mensajeria.TemplateMessage
  */
 public servicios.mensajeria.TemplateMessage getTemplateMsg() {
 	return templateMsg;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (17-11-2000 01:00:15)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (17-11-2000 01:00:15)
  * @return java.lang.String
  */
 public java.lang.String getTipoBean() {
@@ -129,15 +129,15 @@ public void init(Object datos) throws servicios.generales.WSException {
 		resultado = new servicios.generales.OutputServiceBean();
 	}
 	catch (Exception e) {
-		System.out.println("Error al inicializar el controlador del servicio de Mensajería");
-	}
+public void setParameters(jakarta.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws servicios.generales.WSException {
+	jakarta.servlet.http.HttpSession session = request.getSession(false);
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (17-11-2000 00:50:36)
- * @param newFileXML java.lang.String
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
+public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
+ * @param newServletConfig jakarta.servlet.ServletConfig
  */
-public void setFileXML(String newFileXML) {
+public void setServletConfig(jakarta.servlet.ServletConfig newServletConfig) {
 	fileXML = newFileXML;	
 }
 /**
@@ -174,40 +174,40 @@ public void setParameters(javax.servlet.http.HttpServletRequest request, servici
 	
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (17-11-2000 01:05:54)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (17-11-2000 01:05:54)
  * @param newRequest javax.servlet.http.HttpServletRequest
  */
 public void setRequest(javax.servlet.http.HttpServletRequest newRequest) {
 	request = newRequest;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (19-11-2000 18:09:13)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (19-11-2000 18:09:13)
  * @param newResultado servicios.basedatos.ResultSetService
  */
 public void setResultado(servicios.generales.OutputServiceBean newResultado) {
 	resultado = newResultado;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (19-11-2000 18:02:53)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (19-11-2000 18:02:53)
  * @param newServletConfig javax.servlet.ServletConfig
  */
 public void setServletConfig(javax.servlet.ServletConfig newServletConfig) {
 	servletConfig = newServletConfig;	
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (19-11-2000 19:11:39)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (19-11-2000 19:11:39)
  * @param newTemplateMsg servicios.mensajeria.TemplateMessage
  */
 public void setTemplateMsg(servicios.mensajeria.TemplateMessage newTemplateMsg) {
 	templateMsg = newTemplateMsg;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (17-11-2000 01:00:15)
+ * Inserte aquÃ­ la descripciÃ³n del mÃ©todo.
+ * Fecha de creaciÃ³n: (17-11-2000 01:00:15)
  * @param newTipoBean java.lang.String
  */
 public void setTipoBean(java.lang.String newTipoBean) {

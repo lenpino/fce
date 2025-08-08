@@ -9,13 +9,13 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Properties;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -44,7 +44,7 @@ public class CtrlServlet extends HttpServlet {
  * @param param org.w3c.dom.Element
  * 05-01-2001:	Agrega la logica para leer el dato de paginacion desde los atributos del programa
  * 12-01-2001:	Agrega la extraccion de datos para la estructura que contiene los datos
- *							iniciales de la paginación
+ *							iniciales de la paginaciÃ³n
  * 28-07-2003:	Modifica la llamada a las paginas JSP para no usar mapeo cuando viene un URL directo
  * 						esto permite mas flexibilidad en la salida.
  * 26-12-2005: Agrega lista de archivos XSL
@@ -73,7 +73,7 @@ public class CtrlServlet extends HttpServlet {
 			if( e instanceof WSException)
 				throw (WSException)e;
 			else
-				throw new WSException("Clase: CtrlServlet Error: Error al configurar lista de páginas Msg: " + e.getMessage());
+				throw new WSException("Clase: CtrlServlet Error: Error al configurar lista de pÃ¡ginas Msg: " + e.getMessage());
 		}
 	}
 
@@ -107,7 +107,7 @@ public class CtrlServlet extends HttpServlet {
 													}
 											}
 										}
-										//Si la extensión de la pagina corresponde a un archivo XLS
+										//Si la extensiÃ³n de la pagina corresponde a un archivo XLS
 										if(uri.substring(uri.length()-4).equalsIgnoreCase(".xsl")){
 											//Se elimina el primer separador y se usa el metodo replace
 											uri = CtrlServlet.replace(uri.substring(1),"/",FS);
@@ -197,8 +197,8 @@ public class CtrlServlet extends HttpServlet {
 		//Si se especifica un URL directamente, no se usa el mapeo
 		if(npagina.charAt(0) == '/')
 			dispatcher = getServletContext().getRequestDispatcher(npagina);
-		//Si no existe la página de destino se va a la página default
-		else if(pageList.getProperty(npagina) == null)
+			jakarta.servlet.http.HttpSession session = req.getSession(false);
+	public void init() throws jakarta.servlet.ServletException {
 			dispatcher = getServletContext().getRequestDispatcher(defaultPage);
 		else
 			dispatcher = getServletContext().getRequestDispatcher(pageList.getProperty(npagina));
@@ -208,7 +208,7 @@ public class CtrlServlet extends HttpServlet {
 	
 	/**
 	 * 17-06-2003:	Mejora al registro de excepciones imprimiendo el stack en la salida estandar
-	 * 18-05-2004:	Elimina la impresión del stack dado que el ServiceMgr ya lo hace y se duplica la
+	 * 18-05-2004:	Elimina la impresiÃ³n del stack dado que el ServiceMgr ya lo hace y se duplica la
 	 * 						cantidad de lineas impresas en logs, ademas de ser costoso
 	 * 26-01-2006: Corrige error cuando no viene la variable fmtSalida
 	 * */
@@ -281,7 +281,7 @@ public class CtrlServlet extends HttpServlet {
 		//Si se especifica un URL directamente, no se usa el mapeo
 		if(npagina.charAt(0) == '/')
 			dispatcher = getServletContext().getRequestDispatcher(res.encodeURL(npagina));
-		//Si no existe la página de destino se va a la página default
+		//Si no existe la pÃ¡gina de destino se va a la pÃ¡gina default
 		else if(pageList.getProperty(npagina) == null)
 			dispatcher = getServletContext().getRequestDispatcher(res.encodeURL(defaultPage));
 		else

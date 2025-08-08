@@ -38,7 +38,7 @@ public void init(java.lang.Object parametros) {}
  * setContext method comment.
  */
 @Override
-public void setContext(javax.servlet.http.HttpServletRequest req) {}
+public void setContext(jakarta.servlet.http.HttpServletRequest req) {}
 /**
  * setParameters method comment.
  */

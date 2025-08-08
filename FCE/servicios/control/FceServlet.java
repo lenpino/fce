@@ -5,9 +5,9 @@ package servicios.control;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 
 import org.apache.log4j.LogManager;
 
@@ -34,7 +34,7 @@ public class FceServlet extends CtrlServlet{
 		super();
 	}
 	@Override
-	public void init() throws javax.servlet.ServletException {
+	public void init() throws jakarta.servlet.ServletException {
 		super.init();
 		try {
 			ServletConfig config = getServletConfig();
@@ -50,14 +50,14 @@ public class FceServlet extends CtrlServlet{
 		}
 	}
 	@Override
-	public void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
+	public void doPost(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response) throws jakarta.servlet.ServletException, java.io.IOException {
 		performTask(request, response);
 	}
 	@Override
-	public void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
+	public void doGet(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response) throws jakarta.servlet.ServletException, java.io.IOException {
 		performTask(request, response);
 	}
-	public void performTask(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws ServletException {
+	public void performTask(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response) throws ServletException {
 		ThreadService servicio = new ThreadService(manager);
 		try {
 			String contentType = request.getContentType();
@@ -89,7 +89,7 @@ public class FceServlet extends CtrlServlet{
 			servicio = null;
 		}
 	}
-	public void uploadFile(javax.servlet.http.HttpServletRequest request){
+	public void uploadFile(jakarta.servlet.http.HttpServletRequest request){
 		try {
 			int formDataLength = request.getContentLength();
 			DataInputStream in = new DataInputStream(request.getInputStream());

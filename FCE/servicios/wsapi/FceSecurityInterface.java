@@ -14,7 +14,7 @@ package servicios.wsapi;
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 public interface FceSecurityInterface {
-	public void setData(javax.servlet.http.HttpServletRequest data);
+	public void setData(jakarta.servlet.http.HttpServletRequest data);
 	public boolean isProgramSecure();
 	public void writeLog();
 	public int getErrorCode();

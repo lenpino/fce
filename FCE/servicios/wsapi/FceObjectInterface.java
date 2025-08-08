@@ -6,15 +6,15 @@
  */
 package servicios.wsapi;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import servicios.generales.WSPgrmCallException;
 
 /**
  * @author lpino
  *
- * Interface que completa metodos basicos faltantes en la definición de
+ * Interface que completa metodos basicos faltantes en la definiciÃ³n de
  * BusinessObjectInterface como metodo de entrada de ejecucion y de salida
   */
 public interface FceObjectInterface extends BusinessObjectInterface {

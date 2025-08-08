@@ -9,7 +9,7 @@ package servicios.generales;
  * 25-05-2001:	Elimina atributos asociados al conector de MQ y agrega la lista de conectores
  */
 public class InitParams {
-	protected javax.servlet.ServletConfig servletConfig;
+	protected jakarta.servlet.ServletConfig servletConfig;
 	protected servicios.basedatos.MgrCons mgrConsulta;
 	protected servicios.mensajeria.MsgTemplateReader mgrTemplates;
 	protected servicios.mqseries.MqServiceReader lectorServicioMQ;
@@ -73,9 +73,9 @@ public servicios.mensajeria.MsgTemplateReader getMgrTemplates() {
 /**
  * Insert the method's description here.
  * Creation date: (11-09-2000 03:15:01 PM)
- * @return javax.servlet.ServletConfig
+ * @return jakarta.servlet.ServletConfig
  */
-public javax.servlet.ServletConfig getServletConfig() {
+public jakarta.servlet.ServletConfig getServletConfig() {
 	return servletConfig;
 }
 /**
@@ -129,9 +129,9 @@ public void setMgrTemplates(servicios.mensajeria.MsgTemplateReader newMgrTemplat
 /**
  * Insert the method's description here.
  * Creation date: (11-09-2000 03:15:01 PM)
- * @param newServletConfig javax.servlet.ServletConfig
+ * @param newServletConfig jakarta.servlet.ServletConfig
  */
-public void setServletConfig(javax.servlet.ServletConfig newServletConfig) {
+public void setServletConfig(jakarta.servlet.ServletConfig newServletConfig) {
 	servletConfig = newServletConfig;
 }
 }

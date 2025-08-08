@@ -2,7 +2,7 @@ package servicios.basedatos;
 
 import java.util.Properties;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import servicios.generales.WSException;
 
@@ -50,7 +50,7 @@ public String getConsstrproc() {
 //			en la lista de parametros asi que se agregaron. Resuelve el problema
 //			en la Extranet de Proveedores y es compatible con Sybase (TarjetaSodimac)
 //26/02/2003:	Solo retorna el string con el prototipo de la llamada al store procedure para que sea 
-//						en la preparación del CallableStatement en donde se asignen los valores de
+//						en la preparaciÃ³n del CallableStatement en donde se asignen los valores de
 //						los parametros
 //
 public String getConsulta(DBParserParams losParametros) {
@@ -84,7 +84,7 @@ public String getConsulta(DBParserParams losParametros) {
 public java.lang.String getIdPool() {
 	return idPool;
 }
-public java.lang.String getParameter(javax.servlet.http.HttpServletRequest request, HttpSession session, java.lang.String parameterName) throws WSException {
+public java.lang.String getParameter(jakarta.servlet.http.HttpServletRequest request, HttpSession session, java.lang.String parameterName) throws WSException {
 	if(request.getParameter(parameterName) != null){
 		if (request.getAttribute(parameterName) != null)
 			throw new WSException("Clase: ConsultaSP Error: Nombre de parametro " + parameterName + " duplicado Msg: Existe una variable con el mismo nombre en los parametros y en los atributos del REQUEST");
@@ -118,7 +118,7 @@ public void setConsstrproc(String var) {
 public void setIdPool(java.lang.String newIdPool) {
 	idPool = newIdPool;
 }
-public void setParameters(javax.servlet.http.HttpServletRequest req, HttpSession session, DBParserParams losParametros) throws servicios.generales.WSException {
+public void setParameters(jakarta.servlet.http.HttpServletRequest req, HttpSession session, DBParserParams losParametros) throws servicios.generales.WSException {
 	try {
 		//Si existen parametros de entrada
 		if(losParametros.entrada != null){

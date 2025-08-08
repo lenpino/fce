@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Properties;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import servicios.generales.WSException;
 
@@ -134,7 +134,7 @@ public class ConsultaTX {
 	public void setConsbean(String consbean) {
 		Consbean = consbean;
 	}
-	public void setParameters(javax.servlet.http.HttpServletRequest req, HttpSession session) throws servicios.generales.WSException {
+	public void setParameters(jakarta.servlet.http.HttpServletRequest req, HttpSession session) throws servicios.generales.WSException {
 		Hashtable params;
 		try {
 			//Si existen parametros de entrada
@@ -156,7 +156,7 @@ public class ConsultaTX {
 		}
 	}
 	
-	public Object getParameter(javax.servlet.http.HttpServletRequest request, HttpSession session, java.lang.String parameterName) throws java.lang.Exception {
+	public Object getParameter(jakarta.servlet.http.HttpServletRequest request, HttpSession session, java.lang.String parameterName) throws java.lang.Exception {
 		 if (request.getAttribute(parameterName) != null)
 			return request.getAttribute(parameterName);
 		else if (session != null)

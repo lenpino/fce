@@ -12,9 +12,9 @@ import java.nio.ByteBuffer;
  */
 public class CtrlServiceMQ implements servicios.wsapi.CtrlServiceInterface {
 	protected java.lang.String fileXML = "";
-	private javax.servlet.ServletConfig servletConfig = null;
+	private jakarta.servlet.ServletConfig servletConfig = null;
 	private java.lang.String tipoBean = "";
-	protected javax.servlet.http.HttpServletRequest request = null;
+	protected jakarta.servlet.http.HttpServletRequest request = null;
 	protected servicios.generales.OutputServiceBean resultado;
 	protected MqServiceReader lectorServicioMQ;
 	public CommParms paramsMQ;
@@ -124,9 +124,9 @@ public java.util.Properties getListaConnQMgr() {
 /**
  * Insert the method's description here.
  * Creation date: (30-11-2000 03:12:08 PM)
- * @return javax.servlet.http.HttpServletRequest
+ * @return jakarta.servlet.http.HttpServletRequest
  */
-public javax.servlet.http.HttpServletRequest getRequest() {
+public jakarta.servlet.http.HttpServletRequest getRequest() {
 	return request;
 }
 /**
@@ -146,8 +146,8 @@ public Object getResultado() {
 		return null;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (17-11-2000 00:48:38)
+ * @return jakarta.servlet.ServletConfig
+public jakarta.servlet.ServletConfig getServletConfig() {
  * @return javax.servlet.ServletConfig
  */
 public javax.servlet.ServletConfig getServletConfig() {
@@ -213,8 +213,8 @@ public void setListaConnQMgr(java.util.Properties newListaConnQMgr) {
  * setParameters method comment.
  */
 @Override
-public void setParameters(javax.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws servicios.generales.WSException {
-	javax.servlet.http.HttpSession session = request.getSession(false);
+public void setParameters(jakarta.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws servicios.generales.WSException {
+	jakarta.servlet.http.HttpSession session = request.getSession(false);
 	servicios.generales.WSException error = null;
 	//Configuro el modo de operacion en que operara el bean
 	setModo(servicio.getModoOpera());
@@ -245,14 +245,14 @@ public void setParameters(javax.servlet.http.HttpServletRequest request, servici
 /**
  * Insert the method's description here.
  * Creation date: (30-11-2000 03:12:08 PM)
- * @param newRequest javax.servlet.http.HttpServletRequest
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
  */
-public void setRequest(javax.servlet.http.HttpServletRequest newRequest) {
+public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
 	request = newRequest;
 }
 /**
- * Inserte aquí la descripción del método.
- * Fecha de creación: (19-11-2000 18:02:53)
+ * @param newServletConfig jakarta.servlet.ServletConfig
+public void setServletConfig(jakarta.servlet.ServletConfig newServletConfig) {
  * @param newServletConfig javax.servlet.ServletConfig
  */
 public void setServletConfig(javax.servlet.ServletConfig newServletConfig) {

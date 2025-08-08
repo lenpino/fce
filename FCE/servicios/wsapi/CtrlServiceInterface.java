@@ -26,8 +26,8 @@ void init(Object datos) throws servicios.generales.WSException;
 /**
  * Insert the method's description here.
  * Creation date: (11-09-2000 11:43:29 AM)
- * @param request javax.servlet.http.HttpServletRequest
- * @param session javax.servlet.http.HttpSession
+ * @param request jakarta.servlet.http.HttpServletRequest
+ * @param session jakarta.servlet.http.HttpSession
  */
-void setParameters(javax.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws servicios.generales.WSException;
+void setParameters(jakarta.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws servicios.generales.WSException;
 }
