@@ -23,8 +23,8 @@ import javax.naming.directory.ModificationItem;
 import servicios.wsapi.ETCBeanInterface;
 
 public class LdapBean implements ETCBeanInterface{
-	public javax.servlet.http.HttpSession copySesion;
-	public javax.servlet.http.HttpServletRequest copyRequest;
+	public jakarta.servlet.http.HttpSession copySesion;
+	public jakarta.servlet.http.HttpServletRequest copyRequest;
 	public static int MAX_INTENTOS = 3;
 	public java.util.Properties env = new java.util.Properties();
 	protected LdapConfig configuracion;
@@ -391,7 +391,7 @@ public void init(Object parametros) {}
  * setContext method comment.
  */
 @Override
-public void setContext(javax.servlet.http.HttpServletRequest req) {
+public void setContext(jakarta.servlet.http.HttpServletRequest req) {
 	this.copySesion = req.getSession(false);
 	this.copyRequest = req;	
 }
@@ -412,7 +412,7 @@ public java.lang.Object getResult() {
 
 @Override
 public void execute() throws servicios.generales.WSException {
-	//Para la ejecución del bean se espera recibir la información requerida desde el REQUEST
+	//Para la ejecuciÃ³n del bean se espera recibir la informaciÃ³n requerida desde el REQUEST
 	//USUARIO = usuario (String)
 	//CLAVE = clave (String)
 	//ATRIBUTOS = atribs (Properties)

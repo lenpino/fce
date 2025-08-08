@@ -9,10 +9,10 @@ public interface BusinessObjectInterface {
 /**
  * Insert the method's description here.
  * Creation date: (30-10-2000 05:35:45 PM)
- * @param request javax.servlet.http.HttpServletRequest
- * @param session javax.servlet.http.HttpSession
+ * @param request jakarta.servlet.http.HttpServletRequest
+ * @param session jakarta.servlet.http.HttpSession
  */
-void getContext(javax.servlet.http.HttpServletRequest request);
+void getContext(jakarta.servlet.http.HttpServletRequest request);
 /**
  * Insert the method's description here.
  * Creation date: (20-10-2000 10:03:28 AM)

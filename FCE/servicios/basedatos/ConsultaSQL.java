@@ -64,7 +64,7 @@ public String getConsulta() {
 public java.lang.String getIdPool() {
 	return idPool;
 }
-public java.lang.String getParameter(javax.servlet.http.HttpServletRequest request, java.lang.String parameterName) throws java.lang.Exception {
+public java.lang.String getParameter(jakarta.servlet.http.HttpServletRequest request, java.lang.String parameterName) throws java.lang.Exception {
 	java.lang.String paramValues[] = null;
 	java.lang.String key = null;
 	java.lang.String paramValue = null;
@@ -134,7 +134,7 @@ public void setIdPool(java.lang.String newIdPool) {
  * @param req
  * 	HttpRequest con los parametros nombrados
  */
-public void setParameters(javax.servlet.http.HttpServletRequest req) throws WSException{
+public void setParameters(jakarta.servlet.http.HttpServletRequest req) throws WSException{
 	try {
 		if(this.query.equalsIgnoreCase("?")){
 			this.query = (String)req.getAttribute("query");

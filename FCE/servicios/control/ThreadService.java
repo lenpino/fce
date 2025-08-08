@@ -7,7 +7,7 @@
 package servicios.control;
 
 import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import org.w3c.dom.Document;
 import servicios.generales.WSException;
 import servicios.generales.xsl.XslXml2Html;
@@ -34,7 +34,7 @@ public class ThreadService {
 	/**
 	 * Insert the method's description here.
 	 * Creation date: (05-01-2001 06:05:43 PM)
-	 * @param requets javax.servlet.http.HttpServletRequest
+	 * @param requets jakarta.servlet.http.HttpServletRequest
 	 * @param program servicios.control.ProgRequest
 	 * 28-05-2001:	Coloca lo necesario para que una key que sea "sgte" invoque al siguiente servicio
 	 *							que se encuentra definido en el archivo XML
@@ -46,7 +46,7 @@ public class ThreadService {
 	 * 28-12-2005: Implementa la totalidad de la nueva interface FceObjectInterface
 	 * 26-12-2012: La carga dinamica de clases se hace utilizando el classloader asociado al thread
 	 */
-	public void cicloServicios(javax.servlet.http.HttpServletRequest req, servicios.control.ProgRequest programa) throws Exception{
+	public void cicloServicios(jakarta.servlet.http.HttpServletRequest req, servicios.control.ProgRequest programa) throws Exception{
 		//Inicializa el classloader asociado a este thread que es el que corresponde a la aplicacion que realiza el request
 		Thread t = Thread.currentThread();
 		ClassLoader cl = t.getContextClassLoader();
@@ -226,7 +226,7 @@ public class ThreadService {
 	 * 10-12-2006:	Incorpora soporte para utilizar Hibernate directamente
 	 * 18-12-2006:	Valida el uso de Hibernate
 	 */
-	protected String programExec(javax.servlet.http.HttpServletRequest req, String programName) throws servicios.generales.WSException {
+	protected String programExec(jakarta.servlet.http.HttpServletRequest req, String programName) throws servicios.generales.WSException {
 		try {
 			Object id_thread;
 			//Si aun no hay sesion se marca de acuerdo a esto
@@ -244,7 +244,7 @@ public class ThreadService {
 			//Coloca el numero de referencia como cotexto
 			data.logs.logPush(id_thread.toString());
 			servicios.generales.BeanPaginacion paginator = null;
-			javax.servlet.http.HttpSession session = null;
+			jakarta.servlet.http.HttpSession session = null;
 			servicios.control.ProgRequest programa = null;
 			if (programName == null)
 				programName = req.getParameter("reqName");
@@ -342,14 +342,14 @@ public class ThreadService {
 	 * Insert the method's description here.
 	 * Creation date: (11-09-2000 11:26:10 AM)
 	 * Autor: Leonardo Pino
-	 * @param req javax.servlet.RequestDispatcher
+	 * @param req jakarta.servlet.RequestDispatcher
 	 * 26-12-2005:	Verifica el resultado de la ejecuci�n y ejecuta el procesamiento de XSL si es necesario
 	 * 04-01-2006: Completa el c�digo para parsear los XSL y convertirlos en HTML, ademas de agregar el control de errores
 	 * 06-07-2006:	Verifica la existencia de la lista de XSL antes de revisar la lista. Esto evita errores con versiones viejas de FCE
 	 * 09-01-2007:	Completa el manejo de la sesion de hibernate. Agrega mensajes de debug para verificar estado de la sesion
 	 * 26-07-2012: Incorpora los formatos de salida HTML y JSON
 	 */
-	public String execute(javax.servlet.http.HttpServletRequest req) throws servicios.generales.WSException {
+	public String execute(jakarta.servlet.http.HttpServletRequest req) throws servicios.generales.WSException {
 		String aux = programExec(req, null);
 		String salida = "";
 		if(req.getParameter("fmtSalida") !=  null && req.getAttribute("fmtSalida") == null)

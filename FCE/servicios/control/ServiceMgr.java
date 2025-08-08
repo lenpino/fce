@@ -3,9 +3,9 @@ package servicios.control;
 import java.util.HashMap;
 import java.util.Properties;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletResponse;
 
 import servicios.generales.Today;
 import servicios.generales.WSException;
@@ -39,9 +39,9 @@ public ServiceMgr() {
  * Insert the method's description here.
  * Creation date: (18-10-2000 11:09:37 AM)
  */
-public String errorManager(Exception error, javax.servlet.http.HttpServletRequest request, HttpServletResponse response) throws WSException {
+public String errorManager(Exception error, jakarta.servlet.http.HttpServletRequest request, HttpServletResponse response) throws WSException {
 	// Se invalida la sesion para que no se hagan ejecucion de servicios sin estar dentro de la aplicacion
-	javax.servlet.http.HttpSession session = request.getSession(false);
+	jakarta.servlet.http.HttpSession session = request.getSession(false);
 	//Se invalida SSI no existe el flag de invalidacion
 	if(session!=null && session.getAttribute("flagInvalidacion") == null){
 		this.logs.debug("Invalidando la sesion " + session.getId());
@@ -175,12 +175,12 @@ public java.util.Properties getXmlList() {
  * Creation date: (11-09-2000 12:39:19 PM)
  */
 
-//31/01/2001: Se diferencia si es que existe o no un archivo de configuraci髇
-//			para evitar errores en la inicializaci髇 del servlet (solo MQ)
+//31/01/2001: Se diferencia si es que existe o no un archivo de configuraci贸n
+//			para evitar errores en la inicializaci贸n del servlet (solo MQ)
 //04/04/2001:	Se modifica para una inicializacion del XML del servicio ETC
 //24/05/2001: Modifica para utilizar multiples pools de conecciones
-//04/01/2003: Agrega la inicializaci髇 del objeto de logeo permitiendo entregarle
-//						el parametro de donde esta su archivo de configuraci髇
+//04/01/2003: Agrega la inicializaci贸n del objeto de logeo permitiendo entregarle
+//						el parametro de donde esta su archivo de configuraci贸n
 /**
  * 05-06-2003:	Se agrega la mejora para el uso de path relativos en la configuracion
  * 						de los servicios
@@ -193,7 +193,7 @@ public java.util.Properties getXmlList() {
 public void init(ServletConfig config) {
 	//Extraigo el contexto del servlet para saber los path reales de los recursos en la maquina
 	ServletContext contexto = config.getServletContext();
-	//Configuro la informaci髇 del path en el file system en donde se encuentra el home de esta aplicaci髇
+	//Configuro la informaci贸n del path en el file system en donde se encuentra el home de esta aplicaci贸n
 	pathReal = contexto.getRealPath("/");
 	try {
 		logs = new servicios.generales.Logger(ServiceMgr.class,contexto.getRealPath(config.getInitParameter("logPropertiesPath")));
@@ -210,7 +210,7 @@ public void init(ServletConfig config) {
 		programLoader = new servicios.control.ProgramReader();
 	else
 		logs.error("ERROR, valor incorrecto del parametro tipoXml ");
-	//Carga el programa y los archivos XML de los servicios y de inicializaci髇 de los Queue Managers de MQSeries
+	//Carga el programa y los archivos XML de los servicios y de inicializaci贸n de los Queue Managers de MQSeries
 	try {
 		programLoader.init(contexto.getRealPath(config.getInitParameter("appProgram")));
 	}

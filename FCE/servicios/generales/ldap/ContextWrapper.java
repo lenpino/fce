@@ -1,9 +1,9 @@
 package servicios.generales.ldap;
 import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
-import javax.servlet.http.HttpSessionBindingEvent;
-import javax.servlet.http.HttpSessionBindingListener;
-public class ContextWrapper implements javax.servlet.http.HttpSessionBindingListener{
+import jakarta.servlet.http.HttpSessionBindingEvent;
+import jakarta.servlet.http.HttpSessionBindingListener;
+public class ContextWrapper implements jakarta.servlet.http.HttpSessionBindingListener{
 	private DirContext contexto = null;
 	
 	/**

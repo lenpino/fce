@@ -9,14 +9,14 @@ package servicios.generales.ldap;
 import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
 public class WslLdapBean extends LdapBean {
-	public javax.servlet.http.HttpSession copySesion;
+	public jakarta.servlet.http.HttpSession copySesion;
 /**
  * WslLdapBean constructor comment.
  */
 public WslLdapBean() {
 	super();
 }
-	public Object executeAuthentication(String userid, String clave, javax.servlet.http.HttpServletRequest request) throws servicios.generales.WSException {
+	public Object executeAuthentication(String userid, String clave, jakarta.servlet.http.HttpServletRequest request) throws servicios.generales.WSException {
 		javax.naming.NamingEnumeration resultado = null;
 		ListResult lr = null;
 		if (userid != null && clave != null) {
@@ -138,13 +138,13 @@ public WslLdapBean() {
 		return isConnected(getConfiguracion().getLlave() + "=" + userId + "," + this.getConfiguracion().getBaseNode());
 	}
 	
-	public void logOff(javax.servlet.http.HttpServletRequest req) throws servicios.generales.WSException {
+	public void logOff(jakarta.servlet.http.HttpServletRequest req) throws servicios.generales.WSException {
 		ContextWrapper contexto = null;
 		DirContext ctx = null;
 		try {
 			copySesion = req.getSession(false);
 			if(copySesion == null){
-				throw new servicios.generales.WSException("Sesión no existe");
+	private void setContextSession(DirContext contx, jakarta.servlet.http.HttpServletRequest req) throws servicios.generales.WSException, Exception {
 			}
 			contexto = (ContextWrapper) copySesion.getAttribute("contexto");
 			if (contexto != null) {

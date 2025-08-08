@@ -535,7 +535,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (29-09-2000 10:13:11 AM)
- * @return javax.servlet.http.HttpServletRequest
+ * @return jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -557,7 +557,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (11-09-2000 03:37:25 PM)
- * @return javax.servlet.ServletConfig
+ * @return jakarta.servlet.ServletConfig
  */
 </body>
           </ownedComment>
@@ -662,8 +662,8 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (11-09-2000 11:45:44 AM)
- * @param request javax.servlet.http.HttpServletRequest
- * @param session javax.servlet.http.HttpSession
+ * @param request jakarta.servlet.http.HttpServletRequest
+ * @param session jakarta.servlet.http.HttpSession
  * 01-08-2003:	Nuevo tipo de soporte para transacciones
  */
 </body>
@@ -698,7 +698,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (29-09-2000 10:13:11 AM)
- * @param newRequest javax.servlet.http.HttpServletRequest
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -720,7 +720,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (11-09-2000 03:37:25 PM)
- * @param newServletConfig javax.servlet.ServletConfig
+ * @param newServletConfig jakarta.servlet.ServletConfig
  */
 </body>
           </ownedComment>
@@ -3456,7 +3456,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (05-01-2001 06:05:43 PM)
- * @param requets javax.servlet.http.HttpServletRequest
+ * @param requets jakarta.servlet.http.HttpServletRequest
  * @param program servicios.control.ProgRequest
  * 28-05-2001:	Coloca lo necesario para que una key que sea &quot;sgte&quot; invoque al siguiente servicio
  * que se encuentra definido en el archivo XML
@@ -3514,7 +3514,7 @@
  * Creation date: (11-09-2000 11:26:10 AM)
  * Autor: Leonardo Pino
  * @param servicio int
- * @param req javax.servlet.RequestDispatcher
+ * @param req jakarta.servlet.RequestDispatcher
  * @param contexto javax.ejb.SessionBean
  * 26-12-2005:	Verifica el resultado de la ejecución y ejecuta el procesamiento de XSL si es necesario
  * 04-01-2006: Completa el código para parsear los XSL y convertirlos en HTML, ademas de agregar el control de errores
@@ -4179,7 +4179,7 @@
  * Insert the method's description here.
  * Creation date: (14-02-2001 03:44:48 PM)
  * @return boolean
- * @param req javax.servlet.http.HttpServletRequest
+ * @param req jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -4327,7 +4327,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (23-11-2000 12:48:37 PM)
- * @return javax.servlet.http.HttpServletRequest
+ * @return jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -4382,7 +4382,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (23-11-2000 12:48:37 PM)
- * @param newRequest javax.servlet.http.HttpServletRequest
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -4488,7 +4488,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (13-11-2000 05:32:09 PM)
- * @return javax.servlet.http.HttpServletRequest
+ * @return jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -4582,7 +4582,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (13-11-2000 05:32:09 PM)
- * @param newRequest javax.servlet.http.HttpServletRequest
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -4634,7 +4634,7 @@
           <ownedComment xmi:id="_-glmYr3CEeCImcaRJ7dyIw">
             <body>/** 
  * Returns the servletConfig.
- * @return javax.servlet.ServletConfig
+ * @return jakarta.servlet.ServletConfig
  */
 </body>
           </ownedComment>
@@ -5394,7 +5394,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (13-11-2000 05:26:32 PM)
- * @return javax.servlet.http.HttpServletRequest
+ * @return jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -5414,7 +5414,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (14-11-2000 03:04:58 PM)
- * @return javax.servlet.http.HttpSession
+ * @return jakarta.servlet.http.HttpSession
  */
 </body>
           </ownedComment>
@@ -5460,7 +5460,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (13-11-2000 05:26:32 PM)
- * @param newRequest javax.servlet.http.HttpServletRequest
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -5471,7 +5471,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (14-11-2000 03:04:58 PM)
- * @param newSession javax.servlet.http.HttpSession
+ * @param newSession jakarta.servlet.http.HttpSession
  */
 </body>
           </ownedComment>
@@ -5482,7 +5482,7 @@
             <body>/** 
  * * Insert the method's description here.
  * Creation date: (14-11-2000 03:04:58 PM)
- * @param newSession javax.servlet.http.HttpSession
+ * @param newSession jakarta.servlet.http.HttpSession
  */
 </body>
           </ownedComment>
@@ -6202,7 +6202,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (11-09-2000 03:15:01 PM)
- * @return javax.servlet.ServletConfig
+ * @return jakarta.servlet.ServletConfig
  */
 </body>
           </ownedComment>
@@ -6279,7 +6279,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (11-09-2000 03:15:01 PM)
- * @param newServletConfig javax.servlet.ServletConfig
+ * @param newServletConfig jakarta.servlet.ServletConfig
  */
 </body>
           </ownedComment>
@@ -7540,7 +7540,7 @@
  * Inserte aquí la descripción del método.
  * Fecha de creación: (17-11-2000 00:45:03)
  * @return java.lang.String
- * @param request javax.servlet.http.HttpServletRequest
+ * @param request jakarta.servlet.http.HttpServletRequest
  * @param parameterName java.lang.String
  * @param checkRequestParameter java.lang.Boolean
  * @param checkInitParameter java.lang.Boolean
@@ -7575,7 +7575,7 @@
             <body>/** 
  * Inserte aquí la descripción del método.
  * Fecha de creación: (17-11-2000 01:05:54)
- * @return javax.servlet.http.HttpServletRequest
+ * @return jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -7597,7 +7597,7 @@
             <body>/** 
  * Inserte aquí la descripción del método.
  * Fecha de creación: (17-11-2000 00:48:38)
- * @return javax.servlet.ServletConfig
+ * @return jakarta.servlet.ServletConfig
  */
 </body>
           </ownedComment>
@@ -7673,7 +7673,7 @@
             <body>/** 
  * Inserte aquí la descripción del método.
  * Fecha de creación: (17-11-2000 01:05:54)
- * @param newRequest javax.servlet.http.HttpServletRequest
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -7695,7 +7695,7 @@
             <body>/** 
  * Inserte aquí la descripción del método.
  * Fecha de creación: (19-11-2000 18:02:53)
- * @param newServletConfig javax.servlet.ServletConfig
+ * @param newServletConfig jakarta.servlet.ServletConfig
  */
 </body>
           </ownedComment>
@@ -8085,7 +8085,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (30-11-2000 03:12:08 PM)
- * @return javax.servlet.http.HttpServletRequest
+ * @return jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -8107,7 +8107,7 @@
             <body>/** 
  * Inserte aquí la descripción del método.
  * Fecha de creación: (17-11-2000 00:48:38)
- * @return javax.servlet.ServletConfig
+ * @return jakarta.servlet.ServletConfig
  */
 </body>
           </ownedComment>
@@ -8192,7 +8192,7 @@
             <body>/** 
  * Insert the method's description here.
  * Creation date: (30-11-2000 03:12:08 PM)
- * @param newRequest javax.servlet.http.HttpServletRequest
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
  */
 </body>
           </ownedComment>
@@ -8203,7 +8203,7 @@
             <body>/** 
  * Inserte aquí la descripción del método.
  * Fecha de creación: (19-11-2000 18:02:53)
- * @param newServletConfig javax.servlet.ServletConfig
+ * @param newServletConfig jakarta.servlet.ServletConfig
  */
 </body>
           </ownedComment>

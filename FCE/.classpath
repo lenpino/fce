@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path=""/>
-	<classpathentry kind="lib" path="/Users/Len/desarrollo/JavaLibs/classes12.jar"/>
-	<classpathentry kind="lib" path="/Users/Len/desarrollo/JavaLibs/com.ibm.mq.jar"/>
-	<classpathentry kind="lib" path="/Users/Len/desarrollo/JavaLibs/com.ibm.mqbind.jar"/>
-	<classpathentry kind="lib" path="/Users/Len/desarrollo/JavaLibs/jsse.jar"/>
-	<classpathentry kind="lib" path="/Users/Len/desarrollo/JavaLibs/log4j-1.2.jar"/>
-	<classpathentry kind="lib" path="/Users/Len/desarrollo/JavaLibs/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="/Users/Len/desarrollo/JavaLibs/xmlgraphics-commons-1.4.jar"/>
-	<classpathentry kind="lib" path="/Users/Len/desarrollo/JavaLibs/fop-1.0/build/fop.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Applications/apache-tomcat-6.0.35/lib/servlet-api.jar"/>
-	<classpathentry kind="output" path=""/>
+    <classpathentry kind="src" path="servicios"/>
+    <classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"/>
+    <classpathentry kind="output" path="bin"/>
 </classpath>

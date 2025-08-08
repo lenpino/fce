@@ -6,7 +6,7 @@ package servicios.generales;
  * @author: Leonardo Pino
  */
 public class Logoff implements servicios.wsapi.ETCBeanInterface {
-	protected javax.servlet.http.HttpServletRequest copyRequest;
+	protected jakarta.servlet.http.HttpServletRequest copyRequest;
 /**
  * Logoff constructor comment.
  */
@@ -23,7 +23,7 @@ public Logoff() {
 @Override
 public void execute() throws servicios.generales.WSException{
 	try {
-		javax.servlet.http.HttpSession session = copyRequest.getSession();
+		jakarta.servlet.http.HttpSession session = copyRequest.getSession();
 		Integer sessionState = new Integer(1);
 		session.setAttribute("estado", sessionState);
 		session.invalidate();
@@ -35,9 +35,9 @@ public void execute() throws servicios.generales.WSException{
 /**
  * Insert the method's description here.
  * Creation date: (23-11-2000 12:48:37 PM)
- * @return javax.servlet.http.HttpServletRequest
+ * @return jakarta.servlet.http.HttpServletRequest
  */
-public javax.servlet.http.HttpServletRequest getRequest() {
+public jakarta.servlet.http.HttpServletRequest getRequest() {
 	return copyRequest;
 }
 /**
@@ -61,7 +61,7 @@ public void init(java.lang.Object parametros) {}
  * setContext method comment.
  */
 @Override
-public void setContext(javax.servlet.http.HttpServletRequest req) {
+public void setContext(jakarta.servlet.http.HttpServletRequest req) {
 	setRequest(req);
 }
 /**
@@ -72,9 +72,9 @@ public void setParameters(java.lang.Object request) {}
 /**
  * Insert the method's description here.
  * Creation date: (23-11-2000 12:48:37 PM)
- * @param newRequest javax.servlet.http.HttpServletRequest
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
  */
-public void setRequest(javax.servlet.http.HttpServletRequest newRequest) {
+public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
 	copyRequest = newRequest;
 }
 }

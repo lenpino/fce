@@ -4,8 +4,8 @@ package servicios.generales;
  * Insert the type's description here.
  * Creation date: (13-11-2000 04:04:08 PM)
  * @author: Leonardo Pino
- * 08-08-2003:	Manejo del objeto ServletConfig y paso como parametro a la inicialización de los objetos de negocios
- */
+	protected jakarta.servlet.http.HttpServletRequest request;
+	private jakarta.servlet.ServletConfig servletConfig;	
 public class CtrlServiceEtc implements servicios.wsapi.CtrlServiceInterface {
 	protected java.lang.String tipoBean = "";
 	protected javax.servlet.http.HttpServletRequest request;
@@ -38,7 +38,7 @@ public void execute() throws servicios.generales.WSException{
 			if(ETCBean.getResult() != null)
 				setResultGen(ETCBean.getResult());
 			else
-				throw new servicios.generales.WSException("Clase: CtrlServiceEtc " + "Error: Modo de operacion mal configurado en definición de servicio en el XML");
+				throw new servicios.generales.WSException("Clase: CtrlServiceEtc " + "Error: Modo de operacion mal configurado en definiciÃ³n de servicio en el XML");
 		}
 	}
 	catch (Exception e) {
@@ -75,9 +75,9 @@ public java.lang.Object getOtrosParams() {
 /**
  * Insert the method's description here.
  * Creation date: (13-11-2000 05:32:09 PM)
- * @return javax.servlet.http.HttpServletRequest
+ * @return jakarta.servlet.http.HttpServletRequest
  */
-public javax.servlet.http.HttpServletRequest getRequest() {
+public jakarta.servlet.http.HttpServletRequest getRequest() {
 	return request;
 }
 /**
@@ -145,8 +145,8 @@ public void setOtrosParams(java.lang.Object newOtrosParams) {
  * setParameters method comment.
  */
 @Override
-public void setParameters(javax.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws WSException {
-	javax.servlet.http.HttpSession session = request.getSession(false);
+public void setParameters(jakarta.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws WSException {
+	jakarta.servlet.http.HttpSession session = request.getSession(false);
 	servicios.generales.WSException error = null;
 	if (servicio.needSession()) {
 		if (session == null || session.getAttribute("estado") == null || ((Integer) session.getAttribute("estado")).intValue() == 1) {
@@ -177,9 +177,9 @@ public void setParameters(javax.servlet.http.HttpServletRequest request, servici
 /**
  * Insert the method's description here.
  * Creation date: (13-11-2000 05:32:09 PM)
- * @param newRequest javax.servlet.http.HttpServletRequest
+ * @param newRequest jakarta.servlet.http.HttpServletRequest
  */
-public void setRequest(javax.servlet.http.HttpServletRequest newRequest) {
+public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
 	request = newRequest;
 	//Coloca en forma temporal los pool de conexion a la base de datos
 	//para que sean usados por el objeto de LOGIN si se quiere colocar en la 
@@ -220,9 +220,9 @@ public void setTipoBean(java.lang.String newTipoBean) {
 
 	/**
 	 * Returns the servletConfig.
-	 * @return javax.servlet.ServletConfig
+	 * @return jakarta.servlet.ServletConfig
 	 */
-	public javax.servlet.ServletConfig getServletConfig() {
+	public jakarta.servlet.ServletConfig getServletConfig() {
 		return servletConfig;
 	}
 
@@ -230,7 +230,7 @@ public void setTipoBean(java.lang.String newTipoBean) {
 	 * Sets the servletConfig.
 	 * @param servletConfig The servletConfig to set
 	 */
-	public void setServletConfig(javax.servlet.ServletConfig servletConfig) {
+	public void setServletConfig(jakarta.servlet.ServletConfig servletConfig) {
 		this.servletConfig = servletConfig;
 	}
 

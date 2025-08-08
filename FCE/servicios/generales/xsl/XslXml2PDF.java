@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -47,7 +47,7 @@ public class XslXml2PDF extends XslFceTransformer {
 			//Utiliza el XSL configurado como salida para este servicio
 			DOMSource xsltSrc = new DOMSource(this.docXsl);
 			Transformer transformer = tFactory.newTransformer(xsltSrc);
-			//Se asegura que la salida sea a trevés de FOP
+			//Se asegura que la salida sea a trevÃ©s de FOP
 			Result res = new SAXResult(fop.getDefaultHandler());
 			//Setup input
 			DOMSource src = new DOMSource(this.docXml);

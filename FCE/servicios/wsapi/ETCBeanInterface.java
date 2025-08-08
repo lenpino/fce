@@ -34,14 +34,14 @@ void init(Object parametros);
 /**
  * Insert the method's description here.
  * Creation date: (26-03-2001 09:32:46 PM)
- * @param req javax.servlet.http.HttpServletRequest
+ * @param req jakarta.servlet.http.HttpServletRequest
  */
-void setContext(javax.servlet.http.HttpServletRequest req);
+void setContext(jakarta.servlet.http.HttpServletRequest req);
 /**
  * Insert the method's description here.
  * Creation date: (13-11-2000 04:11:31 PM)
- * @param request javax.servlet.http.HttpServletRequest
- * @param session javax.servlet.http.HttpSession
+ * @param request jakarta.servlet.http.HttpServletRequest
+ * @param session jakarta.servlet.http.HttpSession
  */
 void setParameters(Object request);
 }

@@ -8,12 +8,12 @@ package servicios.basedatos;
 public class CtrlServiceDB implements servicios.wsapi.CtrlServiceInterface {
 	protected java.lang.String fileXML = "";
 	private servicios.basedatos.MgrCons mgrConsultas;
-	private javax.servlet.ServletConfig servletConfig;
+	private jakarta.servlet.ServletConfig servletConfig;
 	protected servicios.generales.OutputServiceBean resultado = null;
 	protected SelectBean30 jdbcDbBean;
 	private String tipoBean = "";
 	private String consulta = "";
-	protected javax.servlet.http.HttpServletRequest request;
+	protected jakarta.servlet.http.HttpServletRequest request;
 	protected java.lang.String modo = "";
 	private int numRegModified = 0;
 	private java.util.Properties poolList;
@@ -152,7 +152,7 @@ public class CtrlServiceDB implements servicios.wsapi.CtrlServiceInterface {
 		return numRegModified;
 	}
 	public java.lang.String getParameter(
-		javax.servlet.http.HttpServletRequest request,
+		jakarta.servlet.http.HttpServletRequest request,
 		java.lang.String parameterName,
 		boolean checkRequestParameters,
 		boolean checkInitParameters,
@@ -193,9 +193,9 @@ public class CtrlServiceDB implements servicios.wsapi.CtrlServiceInterface {
 	/**
 	 * Insert the method's description here.
 	 * Creation date: (29-09-2000 10:13:11 AM)
-	 * @return javax.servlet.http.HttpServletRequest
+	 * @return jakarta.servlet.http.HttpServletRequest
 	 */
-	public javax.servlet.http.HttpServletRequest getRequest() {
+	public jakarta.servlet.http.HttpServletRequest getRequest() {
 		return request;
 	}
 	/**
@@ -219,9 +219,9 @@ public class CtrlServiceDB implements servicios.wsapi.CtrlServiceInterface {
 	/**
 	 * Insert the method's description here.
 	 * Creation date: (11-09-2000 03:37:25 PM)
-	 * @return javax.servlet.ServletConfig
+	 * @return jakarta.servlet.ServletConfig
 	 */
-	public javax.servlet.ServletConfig getServletConfig() {
+	public jakarta.servlet.ServletConfig getServletConfig() {
 		return servletConfig;
 	}
 	/**
@@ -301,13 +301,13 @@ public class CtrlServiceDB implements servicios.wsapi.CtrlServiceInterface {
 	/**
 	 * Insert the method's description here.
 	 * Creation date: (11-09-2000 11:45:44 AM)
-	 * @param request javax.servlet.http.HttpServletRequest
-	 * @param session javax.servlet.http.HttpSession
+	 * @param request jakarta.servlet.http.HttpServletRequest
+	 * @param session jakarta.servlet.http.HttpSession
 	 * 01-08-2003:	Nuevo tipo de soporte para transacciones
 	 */
 	@Override
-	public void setParameters(javax.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws servicios.generales.WSException {
-		javax.servlet.http.HttpSession session = request.getSession(false);
+	public void setParameters(jakarta.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws servicios.generales.WSException {
+		jakarta.servlet.http.HttpSession session = request.getSession(false);
 		servicios.generales.WSException error = null;
 		if (servicio.needSession()) {
 			if (session == null || session.getAttribute("estado") == null || ((Integer) session.getAttribute("estado")).intValue() == 1) {
@@ -405,9 +405,9 @@ public class CtrlServiceDB implements servicios.wsapi.CtrlServiceInterface {
 	/**
 	 * Insert the method's description here.
 	 * Creation date: (29-09-2000 10:13:11 AM)
-	 * @param newRequest javax.servlet.http.HttpServletRequest
+	 * @param newRequest jakarta.servlet.http.HttpServletRequest
 	 */
-	public void setRequest(javax.servlet.http.HttpServletRequest newRequest) {
+	public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
 		request = newRequest;
 	}
 	/**
@@ -421,9 +421,9 @@ public class CtrlServiceDB implements servicios.wsapi.CtrlServiceInterface {
 	/**
 	 * Insert the method's description here.
 	 * Creation date: (11-09-2000 03:37:25 PM)
-	 * @param newServletConfig javax.servlet.ServletConfig
+	 * @param newServletConfig jakarta.servlet.ServletConfig
 	 */
-	public void setServletConfig(javax.servlet.ServletConfig newServletConfig) {
+	public void setServletConfig(jakarta.servlet.ServletConfig newServletConfig) {
 		servletConfig = newServletConfig;
 	}
 	/**
