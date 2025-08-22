@@ -25,13 +25,13 @@ public CtrlServiceMsg() {
 @Override
 public void execute() throws servicios.generales.WSException {}
 /**
- * @param request jakarta.servlet.http.HttpServletRequest
-public String getParameter(jakarta.servlet.http.HttpServletRequest request, String parameterName, boolean checkRequestParameters, boolean checkInitParameters, boolean isParameterRequired, String defaultValue) throws java.lang.Exception {
- * @return jakarta.servlet.http.HttpServletRequest
+ * Inserte aqu� la descripci�n del m�todo.
+ * Fecha de creaci�n: (17-11-2000 00:38:06)
+ * @return java.lang.String
  */
-public jakarta.servlet.http.HttpServletRequest getRequest() {
- * @return jakarta.servlet.ServletConfig
-public jakarta.servlet.ServletConfig getServletConfig() {
+public String getFileXML() {
+	return fileXML;
+}
 /**
  * Insert the method's description here.
  * Creation date: (27-11-2000 02:43:34 PM)
@@ -52,7 +52,7 @@ public MsgTemplateReader getLectorMsg() {
  * @param defaultValue java.lang.String
  * @exception java.lang.Exception La descripción de excepción.
  */
-public String getParameter(javax.servlet.http.HttpServletRequest request, String parameterName, boolean checkRequestParameters, boolean checkInitParameters, boolean isParameterRequired, String defaultValue) throws java.lang.Exception {
+public String getParameter(jakarta.servlet.http.HttpServletRequest request, String parameterName, boolean checkRequestParameters, boolean checkInitParameters, boolean isParameterRequired, String defaultValue) throws java.lang.Exception {
 
 	java.lang.String[] parameterValues = null;
 	java.lang.String paramValue = null;
@@ -80,7 +80,7 @@ public String getParameter(javax.servlet.http.HttpServletRequest request, String
  * Fecha de creación: (17-11-2000 01:05:54)
  * @return javax.servlet.http.HttpServletRequest
  */
-public javax.servlet.http.HttpServletRequest getRequest() {
+public jakarta.servlet.http.HttpServletRequest getRequest() {
 	return request;
 }
 /**
@@ -97,7 +97,7 @@ public Object getResultado() {
  * Fecha de creación: (17-11-2000 00:48:38)
  * @return javax.servlet.ServletConfig
  */
-public javax.servlet.ServletConfig getServletConfig() {
+public jakarta.servlet.ServletConfig getServletConfig() {
 	return servletConfig;
 }
 /**
@@ -129,15 +129,15 @@ public void init(Object datos) throws servicios.generales.WSException {
 		resultado = new servicios.generales.OutputServiceBean();
 	}
 	catch (Exception e) {
-public void setParameters(jakarta.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws servicios.generales.WSException {
-	jakarta.servlet.http.HttpSession session = request.getSession(false);
+		System.out.println("Error al inicializar el controlador del servicio de Mensajer�a");
+	}
 }
 /**
- * @param newRequest jakarta.servlet.http.HttpServletRequest
-public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
- * @param newServletConfig jakarta.servlet.ServletConfig
+ * Inserte aqu� la descripci�n del m�todo.
+ * Fecha de creaci�n: (17-11-2000 00:50:36)
+ * @param newFileXML java.lang.String
  */
-public void setServletConfig(jakarta.servlet.ServletConfig newServletConfig) {
+public void setFileXML(String newFileXML) {
 	fileXML = newFileXML;	
 }
 /**
@@ -152,8 +152,8 @@ public void setLectorMsg(MsgTemplateReader newLectorMsg) {
  * setParameters method comment.
  */
 @Override
-public void setParameters(javax.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws servicios.generales.WSException {
-	javax.servlet.http.HttpSession session = request.getSession(false);
+public void setParameters(jakarta.servlet.http.HttpServletRequest request, servicios.control.Service servicio) throws servicios.generales.WSException {
+	jakarta.servlet.http.HttpSession session = request.getSession(false);
 	if (servicio.needSession()) {
 		if (session == null || session.getAttribute("estado") == null || ((Integer) session.getAttribute("estado")).intValue() == 1) {
 			servicios.generales.WSException error = new servicios.generales.WSException("Sin sesion");
@@ -178,7 +178,7 @@ public void setParameters(javax.servlet.http.HttpServletRequest request, servici
  * Fecha de creación: (17-11-2000 01:05:54)
  * @param newRequest javax.servlet.http.HttpServletRequest
  */
-public void setRequest(javax.servlet.http.HttpServletRequest newRequest) {
+public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
 	request = newRequest;
 }
 /**
@@ -194,7 +194,7 @@ public void setResultado(servicios.generales.OutputServiceBean newResultado) {
  * Fecha de creación: (19-11-2000 18:02:53)
  * @param newServletConfig javax.servlet.ServletConfig
  */
-public void setServletConfig(javax.servlet.ServletConfig newServletConfig) {
+public void setServletConfig(jakarta.servlet.ServletConfig newServletConfig) {
 	servletConfig = newServletConfig;	
 }
 /**

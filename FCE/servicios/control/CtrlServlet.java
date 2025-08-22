@@ -16,6 +16,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -197,8 +199,8 @@ public class CtrlServlet extends HttpServlet {
 		//Si se especifica un URL directamente, no se usa el mapeo
 		if(npagina.charAt(0) == '/')
 			dispatcher = getServletContext().getRequestDispatcher(npagina);
-			jakarta.servlet.http.HttpSession session = req.getSession(false);
-	public void init() throws jakarta.servlet.ServletException {
+		//Si no existe la p�gina de destino se va a la p�gina default
+		else if(pageList.getProperty(npagina) == null)
 			dispatcher = getServletContext().getRequestDispatcher(defaultPage);
 		else
 			dispatcher = getServletContext().getRequestDispatcher(pageList.getProperty(npagina));
@@ -215,7 +217,7 @@ public class CtrlServlet extends HttpServlet {
 	public void handleError(HttpServletRequest req, HttpServletResponse res, Object error) throws ServletException{
 		try {
 			// Se invalida la sesion para que no se hagan ejecucion de servicios sin estar dentro de la aplicacion
-			javax.servlet.http.HttpSession session = req.getSession(false);
+			HttpSession session = req.getSession(false);
 			//Se invalida SSI no existe el flag de invalidacion
 			if(session!=null && session.getAttribute("flagInvalidacion") == null){
 				System.out.println("Invalidando la sesion " + session.getId());
@@ -262,7 +264,7 @@ public class CtrlServlet extends HttpServlet {
 	 * 26-12-2005:	Inicia la lista de archivos XSL
 	 * */
 	@Override
-	public void init() throws javax.servlet.ServletException {
+	public void init() throws ServletException {
 		super.init();
 		try{
 			ServletConfig config = getServletConfig();

@@ -9,7 +9,7 @@ import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 
-import org.apache.log4j.LogManager;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * @author lpino
@@ -34,7 +34,7 @@ public class FceServlet extends CtrlServlet{
 		super();
 	}
 	@Override
-	public void init() throws jakarta.servlet.ServletException {
+	public void init() throws ServletException {
 		super.init();
 		try {
 			ServletConfig config = getServletConfig();

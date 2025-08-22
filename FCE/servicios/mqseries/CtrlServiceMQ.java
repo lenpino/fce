@@ -37,7 +37,10 @@ public CtrlServiceMQ() {
 public void execute() throws servicios.generales.WSException {
 	servicios.wsapi.CommBeanInterface CommBean = null;
 	try {
-		CommBean = (servicios.wsapi.CommBeanInterface)Class.forName( "servicios.mqseries." + getTipoBean()).newInstance();
+		CommBean = Class.forName("servicios.mqseries." + getTipoBean())
+		        .asSubclass(servicios.wsapi.CommBeanInterface.class)
+		        .getDeclaredConstructor()
+		        .newInstance();
 		//Inicializo las estructuras de datos del bean
 		CommBean.init();
 		//Me conecto a la via de comunicacion, esto debe se mas general!!!
@@ -150,7 +153,7 @@ public Object getResultado() {
 public jakarta.servlet.ServletConfig getServletConfig() {
  * @return javax.servlet.ServletConfig
  */
-public javax.servlet.ServletConfig getServletConfig() {
+public jakarta.servlet.ServletConfig getServletConfig() {
 	return servletConfig;
 }
 /**
@@ -255,7 +258,7 @@ public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
 public void setServletConfig(jakarta.servlet.ServletConfig newServletConfig) {
  * @param newServletConfig javax.servlet.ServletConfig
  */
-public void setServletConfig(javax.servlet.ServletConfig newServletConfig) {
+public void setServletConfig(jakarta.servlet.ServletConfig newServletConfig) {
 	servletConfig = newServletConfig;	
 }
 /**

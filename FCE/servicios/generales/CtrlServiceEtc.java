@@ -1,20 +1,22 @@
 package servicios.generales;
 
+import servicios.wsapi.ETCBeanInterface;
+
 /**
  * Insert the type's description here.
  * Creation date: (13-11-2000 04:04:08 PM)
  * @author: Leonardo Pino
-	protected jakarta.servlet.http.HttpServletRequest request;
-	private jakarta.servlet.ServletConfig servletConfig;	
+ * 08-08-2003:	Manejo del objeto ServletConfig y paso como parametro a la inicializaci�n de los objetos de negocios
+ */
 public class CtrlServiceEtc implements servicios.wsapi.CtrlServiceInterface {
 	protected java.lang.String tipoBean = "";
-	protected javax.servlet.http.HttpServletRequest request;
+	protected jakarta.servlet.http.HttpServletRequest request;
 	protected java.lang.Object otrosParams;
 	private EtcReader confSubServices;
 	protected java.lang.Object resultGen;
 	protected java.lang.String modo = "";
 	protected java.lang.String tipoConsulta = "";
-	private javax.servlet.ServletConfig servletConfig;	
+	private jakarta.servlet.ServletConfig servletConfig;	
 	private java.util.Properties poolList;
 /**
  * CtrlServiceEtc constructor comment.
@@ -27,9 +29,12 @@ public CtrlServiceEtc() {
  */
 @Override
 public void execute() throws servicios.generales.WSException{
+	String className = "servicios.generales." + getTipoBean();
+	ClassLoader cl = Thread.currentThread().getContextClassLoader();
 	try {
 		servicios.wsapi.ETCBeanInterface ETCBean = null;
-		ETCBean = (servicios.wsapi.ETCBeanInterface)Class.forName( "servicios.generales." + getTipoBean()).newInstance();
+	    Class<? extends ETCBeanInterface> type = Class.forName(className, true, cl).asSubclass(ETCBeanInterface.class);
+	    ETCBean = type.getDeclaredConstructor().newInstance(); // 👈 reemplazo moderno
 		ETCBean.init(getServletConfig());
 		ETCBean.setContext(getRequest());
 		ETCBean.setParameters(getConfSubServices().getObject(getTipoBean(),getTipoConsulta()));

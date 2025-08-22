@@ -4,167 +4,181 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * Insert the type's description here.
- * Creation date: (13-11-2000 05:13:15 PM)
+ * Inserta aquí la descripción del tipo.
+ * Fecha de creación: (13-11-2000 05:13:15 PM)
  * @author: Leonardo Pino
- * 08-08-2003:	Agrega objeto ServletConfig a la sesion si el usuario se logea
+ * 08-08-2003:	Agrega objeto ServletConfig a la sesión si el usuario se loguea
  */
 public class Login implements servicios.wsapi.ETCBeanInterface {
 	protected jakarta.servlet.http.HttpServletRequest request;
 	protected jakarta.servlet.http.HttpSession session;
 	protected jakarta.servlet.ServletConfig servletConfig;
-	public final static String FS = System.getProperty("file.separator");
+	public static final String FS = System.getProperty("file.separator");
+
 /**
- * Login constructor comment.
+ * Comentario del constructor Login.
  */
 public Login() {
 	super();
 }
+
 /**
- * execute method comment.
+ * Comentario del método execute.
  */
 @Override
 public void execute() throws servicios.generales.WSException{
 	try {
-		Integer intentos = null;
-		HashMap usersTries = null;
-		Integer sessionState = null;
+		Integer intentos;
+		Map<String, Integer> intentosUsuarios;
+		Integer estadoSesion;
 		setSession(getRequest().getSession());
-		//Si no hay sesion crea una vieja, si la sesion es nueva la convierte a vieja
+		//Si no hay sesión crea una nueva, si la sesión es nueva la convierte a antigua
 		if (getSession().isNew()) { 						
-			//Si la SESSION es nueva
-			intentos = new Integer(0);
-			usersTries = new HashMap();
+			//Si la SESIÓN es nueva
+			intentos = 0;
+			intentosUsuarios = new HashMap<>();
 			//Son 0 intentos
-			sessionState = new Integer(0);
-			String mula = "";
-			session.setAttribute("refNum", mula);
+			estadoSesion = 0;
+			String referencia = "";
+			session.setAttribute("refNum", referencia);
 		}
 		else { 												
-			//Si la SESSION es vieja	
-			//Rescato el numero de intentos que el usuario ya posee
+			//Si la SESIÓN es antigua	
+			//Rescato el número de intentos que el usuario ya posee
 			intentos = (Integer) session.getAttribute("tries"); 
-			usersTries =(HashMap) session.getAttribute("usersTries");
+			intentosUsuarios = (Map<String, Integer>) session.getAttribute("usersTries");
 			if (intentos == null)
-				intentos = new Integer(0);
-			if (usersTries==null)
-				usersTries = new HashMap();
-			if (intentos.intValue() > 0) {
-				sessionState = new Integer(-1);
+				intentos = 0;
+			if (intentosUsuarios == null)
+				intentosUsuarios = new HashMap<>();
+			if (intentos > 0) {
+				estadoSesion = -1;
 			}
 			else {
-				sessionState = new Integer(0);
+				estadoSesion = 0;
 			}
 		}
 		
-		//Coloca valores para verificar el numero de intentos de login
+		//Coloca valores para verificar el número de intentos de login
 		session.setAttribute("tries", intentos);
-		session.setAttribute("usersTries", usersTries);
-		session.setAttribute("estado", sessionState);
+		session.setAttribute("usersTries", intentosUsuarios);
+		session.setAttribute("estado", estadoSesion);
 		
-		//se copia la configuracion del servlet controlador para que sea usada por el resto del sistema 
+		//se copia la configuración del servlet controlador para que sea usada por el resto del sistema 
 		//si se necesita
 		ServletContext contexto = this.servletConfig.getServletContext();
-		String pathReal = contexto.getRealPath("") + FS;
+		String rutaReal = contexto.getRealPath("") + FS;
 		//Elimina esa dependencia dado que solo funciona para ambientes Windows
-		session.setAttribute("configuracion",pathReal);
+		session.setAttribute("configuracion", rutaReal);
 		//Se copia la lista de pools de conexiones a la(s) BD(s) si se requiere usar en
 		//los objetos de negocio
 		session.setAttribute("pools", getRequest().getAttribute("pools"));
- * @return jakarta.servlet.http.HttpServletRequest
-public jakarta.servlet.http.HttpServletRequest getRequest() {
- * @return jakarta.servlet.http.HttpSession
-public jakarta.servlet.http.HttpSession getSession() {
-	this.servletConfig = (jakarta.servlet.ServletConfig)parametros;
-public void setContext(jakarta.servlet.http.HttpServletRequest req) {
- * @param newRequest jakarta.servlet.http.HttpServletRequest
-public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
+		//Crea la lista de parámetros propios de la aplicación y los coloca en la sesión
+		if(this.servletConfig.getInitParameter("parametros") != null)
+			session.setAttribute("params", getParametrosAplicacion(contexto.getRealPath(this.servletConfig.getInitParameter("parametros"))));
+	}
+	catch (Exception e) {
+		throw new servicios.generales.WSException("Error en la configuración de la sesión");
+	}
+}
+
 /**
- * Insert the method's description here.
- * @param newSession jakarta.servlet.http.HttpSession
-public void setSession(jakarta.servlet.http.HttpSession newSession) {
-* @param newSession jakarta.servlet.http.HttpSession
-public javax.servlet.http.HttpServletRequest getRequest() {
+ * Inserta aquí la descripción del método.
+ * Fecha de creación: (13-11-2000 05:26:32 PM)
+ * @return javax.servlet.http.HttpServletRequest
+ */
+public jakarta.servlet.http.HttpServletRequest getRequest() {
 	return request;
 }
+
 /**
- * getResult method comment.
+ * Comentario del método getResult.
  */
 @Override
-public java.lang.Object getResult() {
+public Object getResult() {
 	return null;
 }
+
 /**
- * Insert the method's description here.
- * Creation date: (14-11-2000 03:04:58 PM)
+ * Inserta aquí la descripción del método.
+ * Fecha de creación: (14-11-2000 03:04:58 PM)
  * @return javax.servlet.http.HttpSession
  */
-public javax.servlet.http.HttpSession getSession() {
+public jakarta.servlet.http.HttpSession getSession() {
 	return session;
 }
+
 /**
- * init method comment.
+ * Comentario del método init.
  */
 @Override
 public void init() throws servicios.generales.WSException{}
+
 /**
- * init method comment.
+ * Comentario del método init.
  */
 @Override
-public void init(java.lang.Object parametros) {
-	this.servletConfig = (javax.servlet.ServletConfig)parametros;
+public void init(Object parametros) {
+	this.servletConfig = (jakarta.servlet.ServletConfig)parametros;
 }
+
 /**
- * setContext method comment.
+ * Comentario del método setContext.
  */
 @Override
-public void setContext(javax.servlet.http.HttpServletRequest req) {
+public void setContext(HttpServletRequest req) {
 	setRequest(req);
 }
+
 /**
- * setParameters method comment.
+ * Comentario del método setParameters.
  */
 @Override
-public void setParameters(java.lang.Object request) {
-	//No configuro ningun parametro
+public void setParameters(Object request) {
+	//No configuro ningún parámetro
 }
+
 /**
- * Insert the method's description here.
- * Creation date: (13-11-2000 05:26:32 PM)
+ * Inserta aquí la descripción del método.
+ * Fecha de creación: (13-11-2000 05:26:32 PM)
  * @param newRequest javax.servlet.http.HttpServletRequest
  */
-public void setRequest(javax.servlet.http.HttpServletRequest newRequest) {
+public void setRequest(jakarta.servlet.http.HttpServletRequest newRequest) {
 	request = newRequest;
 }
+
 /**
- * Insert the method's description here.
- * Creation date: (14-11-2000 03:04:58 PM)
+ * Inserta aquí la descripción del método.
+ * Fecha de creación: (14-11-2000 03:04:58 PM)
  * @param newSession javax.servlet.http.HttpSession
  */
-public void setSession(javax.servlet.http.HttpSession newSession) {
+public void setSession(jakarta.servlet.http.HttpSession newSession) {
 	session = newSession;
 }
+
 /**
- * * Insert the method's description here.
-* Creation date: (14-11-2000 03:04:58 PM)
-* @param newSession javax.servlet.http.HttpSession
-*/
-	private Properties getAppParams(String file){
-		Properties params = new Properties();
-		try {
-			params.load(new FileInputStream(file));
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		} 
-		return params;
+ * Inserta aquí la descripción del método.
+ * Fecha de creación: (14-11-2000 03:04:58 PM)
+ * @param archivo ruta del archivo de propiedades
+ */
+private Properties getParametrosAplicacion(String archivo){
+	var parametros = new Properties();
+	try (var inputStream = new FileInputStream(archivo)) {
+		parametros.load(inputStream);
 	}
+	catch (FileNotFoundException e) {
+		e.printStackTrace();
+	}
+	catch (IOException e) {
+		e.printStackTrace();
+	} 
+	return parametros;
+}
 }

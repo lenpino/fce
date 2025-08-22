@@ -144,7 +144,7 @@ public WslLdapBean() {
 		try {
 			copySesion = req.getSession(false);
 			if(copySesion == null){
-	private void setContextSession(DirContext contx, jakarta.servlet.http.HttpServletRequest req) throws servicios.generales.WSException, Exception {
+				throw new servicios.generales.WSException("Sesi�n no existe");
 			}
 			contexto = (ContextWrapper) copySesion.getAttribute("contexto");
 			if (contexto != null) {
@@ -183,7 +183,7 @@ public static void main(java.lang.String[] args) {
 			System.out.println(e.getMessage());
 		}
 }
-	private void setContextSession(DirContext contx, javax.servlet.http.HttpServletRequest req) throws servicios.generales.WSException, Exception {
+	private void setContextSession(DirContext contx, jakarta.servlet.http.HttpServletRequest req) throws servicios.generales.WSException, Exception {
 		//Obtengo la sesion asociada a este usuario
 		copySesion = req.getSession();
 		//Creo un wrapper de contexto

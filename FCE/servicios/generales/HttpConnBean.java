@@ -1,449 +1,299 @@
 package servicios.generales;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.w3c.dom.Document;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.*;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.Enumeration;
 import java.util.Properties;
-
-import org.apache.xerces.parsers.DOMParser;
-import org.apache.xml.serialize.OutputFormat;
-import org.apache.xml.serialize.XMLSerializer;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-
-import com.sun.net.ssl.HttpsURLConnection;
+import java.util.StringJoiner;
 
 /**
- * @author Leonardo
- *
+ * Versi√≥n modernizada de HttpConnBean (Java 11+).
+ * - Usa HttpClient en vez de HttpURLConnection.
+ * - Sin dependencias Xerces ni com.sun.net.ssl.
+ * - Serializa XML con JAXP Transformer.
+ * - M√©todos conservan nombres y tipos de retorno donde es razonable.
  */
 public class HttpConnBean {
-	private String sURI;
-	private Document doc;
-	
-	public static String preSOAP = ""+
-	"<SOAP-ENV:Envelope "+
-	"xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" "+
-	"xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" "+
-	"xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "+
-	"xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"+
-	"<SOAP-ENV:Body>";
-	public static String postSOAP =""+
-	"</SOAP-ENV:Body>"+
-	"</SOAP-ENV:Envelope>"; 
 
-	public HttpConnBean(String serverURI) {
-		sURI = serverURI;
-	}
-	public StringBuffer sendRequest(Document docXml, String encoding) {
-		try {
-			//Crea el URL para establecer la comunicaciÛn
-			URL url = new URL(sURI);
-			// Crea la conecciÛn a partir de una conexion abierta por el URL
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			//Configura la conexiÛn para entrada y salida
-			conn.setDoInput(true);
-			conn.setDoOutput(true);
-			conn.setUseCaches(false);
-			//Objeto encargado de llevar la informaciÛn a traves del canal de comunicaciÛn
-			OutputStream out = conn.getOutputStream();
-			//Se crea un serializador con el objeto de traspaso de informaciÛn y el formato de salida
-			XMLSerializer ser = new XMLSerializer(out, new OutputFormat("xml", "UTF-8", false));
-			//Se envia la informaciÛn (XML) a traves del canal
-			ser.serialize(docXml);
-			//Se cierra el objeto que traspaso la informaciÛn
-			out.close();
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			//Se crea un parser 
-			//			DOMParser parser = new DOMParser();
-			//Se lee desde la entrada con la conexiÛn abierta
-			//			parser.parse(new InputSource(conn.getInputStream()));
-			//Se crea un documento para retornarlo
-			//			docOut = parser.getDocument();
-			//			InputSource in = new InputSource(conn.getInputStream());
-			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			StringBuffer html = new StringBuffer();
-			String linea = "";
-			while ((linea = in.readLine()) != null)
-				html.append(linea);
-			in.close();
-			return html;
-		}
-		catch (Throwable e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	public static void main(String[] args) {
-		try {
-			// Envia el XML al Servlet y recibe elmismo XML de respuesta
-			//Creo un conjunto de parametros para ser posteados con la URL
-			Properties parametros = new Properties();
-						parametros.put("firstname","Leo");
-			    		parametros.put("lastname","Pino");
-			//    		parametros.put("Path","c:/Previred/Files/BcoChile.txt");
-			//    		parametros.put("Periodo","052003");
-			//    		parametros.put("UrlOrigen","");
-			//    		parametros.put("Email","lpino@previred.com");
-			//    		parametros.put("Id_Convenio","1234567");
-			//			parametros.put("Accion","ValidaCarga");
-			//			parametros.put("Identificador_Indexa","1234567890");
-			//			parametros.put("Convenio","Bcochile");
-			//			parametros.put("TipoCarga","2");
-			HttpConnBean a = new HttpConnBean(args[0]);
-			//			a.load(args[1]);
-			System.out.println(a.sendPost(parametros,true));
-			//			Document docOut = a.sendRequest();
-			// Imprime el mismo XML por la consola 
-			//			XMLSerializer ser = new XMLSerializer(System.out, null);
-			//			ser.serialize(docOut);
-		}
-		catch (Throwable e) {
-			e.printStackTrace();
-		}
-	}
-	public Document sendXML() {
-		try {
-			//Crea el URL para establecer la comunicaciÛn
-			URL url = new URL(sURI);
-			// Crea la conecciÛn a partir de una conexion abierta por el URL
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			//Configura la conexiÛn para salida
-			conn.setDoOutput(true);
-			//Objeto encargado de llevar la informaciÛn a traves del canal de comunicaciÛn
-			OutputStream out = conn.getOutputStream();
-			//Se crea un serializador con el objeto de traspaso de informaciÛn y el formato de salida
-			XMLSerializer ser = new XMLSerializer(out, new OutputFormat("text", "ISO-8859-1", false));
-			//Se envia la informaciÛn (XML) a traves del canal
-			ser.serialize(this.doc);
-			System.out.println("Xml enviado a: " + sURI);
-			//Se cierra el objeto que traspaso la informaciÛn
-			out.close();
-			//Recibe el xml y genera un mensaje de respuesta
-			return XmlBean.getDocXML(new InputSource(conn.getInputStream()),false);
-		}
-		catch (Throwable e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	public void load(String ArchivoXml) {
-		try {
-			// Open specified file
-			InputStream is = new FileInputStream(ArchivoXml);
-			// Start parsing
-			DOMParser parser = new DOMParser();
-			parser.setFeature("http://xml.org/sax/features/validation", true);
-			parser.setFeature("http://apache.org/xml/features/validation/schema", true);
-			parser.parse(new org.xml.sax.InputSource(is));
-			this.doc = parser.getDocument(); // @XML4J
-			// Document is well-formed
-		}
-		catch (Throwable e) {
-			e.printStackTrace();
-		}
-	}
-	public void sendXMLHttps() {
-		try {
-			HttpsURLConnection conn = null;
-			System.getProperties().put("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol");
-			java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-			//Crea el URL para establecer la comunicaciÛn
-			URL url = new URL(sURI);
-			// Crea la conecciÛn a partir de una conexion abierta por el URL
-			conn = (HttpsURLConnection) url.openConnection();
-			//Configura la conexiÛn para salida
-			conn.setDoOutput(true);
-			//Objeto encargado de llevar la informaciÛn a traves del canal de comunicaciÛn
-			OutputStream out = conn.getOutputStream();
-			//Se crea un serializador con el objeto de traspaso de informaciÛn y el formato de salida
-			XMLSerializer ser = new XMLSerializer(out, new OutputFormat("xml", "UTF-8", false));
-			//Se envia la informaciÛn (XML) a traves del canal
-			ser.serialize(this.doc);
-			System.out.println("Xml enviado a: " + sURI);
-			//Se cierra el objeto que traspaso la informaciÛn
-			out.close();
-			String linea = "";
-			java.io.BufferedReader arch = new java.io.BufferedReader(new InputStreamReader(conn.getInputStream()));
-			while ((linea = arch.readLine()) != null)
-				System.out.println(linea);
-			//				XMLSerializer ser2 = new XMLSerializer(System.out, null);
-			//				ser2.serialize(this.doc);
-		}
-		catch (Throwable e) {
-			e.printStackTrace();
-		}
-	}
-	public Document sendXML(Document docXml, String encoding) throws MsgException {
-		try {
-			//Crea el URL para establecer la comunicaciÛn
-			URL url = new URL(sURI);
-			// Crea la conecciÛn a partir de una conexion abierta por el URL
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			//Configura la conexiÛn para salida
-			conn.setDoOutput(true);
-			//Objeto encargado de llevar la informaciÛn a traves del canal de comunicaciÛn
-			OutputStream out = conn.getOutputStream();
-			//Se crea un serializador con el objeto de traspaso de informaciÛn y el formato de salida
-			XMLSerializer ser = new XMLSerializer(out, new OutputFormat("text", encoding, false));
-			//Se envia la informaciÛn (XML) a traves del canal
-			ser.serialize(docXml);
-			System.out.println("\rXml enviado a: " + sURI);
-			//Se cierra el objeto que traspaso la informaciÛn
-			out.close();
-			//Recibe el xml y genera un mensaje de respuesta
-			return XmlBean.getDocXML(new InputSource(conn.getInputStream()),false);
-		}
-		catch (Throwable e) {
-			throw new MsgException("Clase: XmlBridge - Error al enviar el mensaje al cliente Msg: " + e.getMessage());
-		}
-	}
-	public StringBuffer sendPost(Properties params) {
-		URL url;
-		DataOutputStream printout;
-		String content = null;
-		try {
-			url = new URL(sURI);
-			// URL connection channel.
-			HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-			// Dejo saber al run-time que no quiero recibir.
-			urlConn.setDoInput(true);
-			// Dejo saber al run-time que quiero enviar.
-			urlConn.setDoOutput(true);
-			// Desabilito el cache.
-			urlConn.setUseCaches(false);
-			// Especifico el  tipo del contenido.
-			urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			// Send POST output.
-			printout = new DataOutputStream(urlConn.getOutputStream());
-			//Extraigo los parametros a enviar
-			if (!params.isEmpty()) {
-				Enumeration e = params.keys();
-				StringBuffer buffer = new StringBuffer();
-				while (e.hasMoreElements()) {
-					String aux = (String) e.nextElement();
-					buffer.append(aux + "=" + params.getProperty(aux) + "&");
-				}
-				content = (buffer.deleteCharAt(buffer.length() - 1)).toString();
-			}
-			else
-				content = "";
-			printout.writeBytes(content);
-			printout.flush();
-			printout.close();
-			// Get response data.
-			System.out.println("Termine :-)");
-			java.io.BufferedReader arch = new java.io.BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-			StringBuffer html = new StringBuffer();
-			String linea = "";
-			while ((linea = arch.readLine()) != null)
-				html.append(linea);
-			arch.close();
-			return html;
-		}
-		catch (MalformedURLException e) {
-			return null;
-		}
-		catch (UnsupportedEncodingException e) {
-			return null;
-		}
-		catch (IOException e) {
-			return null;
-		}
-	}
-/**
- * 
- * @param sURI
- */	public void setSURI(String sURI) {
-		this.sURI = sURI;
-	}
-	public StringBuffer sendPost(Properties params, boolean salida) {
-		URL url;
-		DataOutputStream printout;
-		String content = null;
-		try {
-			url = new URL(sURI);
-			// URL connection channel.
-			HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-			// Dejo saber al run-time que no quiero recibir.
-			urlConn.setDoInput(salida);
-			// Dejo saber al run-time que quiero enviar.
-			urlConn.setDoOutput(true);
-			// Desabilito el cache.
-			urlConn.setUseCaches(false);
-			// Especifico el  tipo del contenido.
-			urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			// Send POST output.
-			printout = new DataOutputStream(urlConn.getOutputStream());
-			//Extraigo los parametros a enviar
-			if (!params.isEmpty()) {
-				Enumeration e = params.keys();
-				StringBuffer buffer = new StringBuffer();
-				while (e.hasMoreElements()) {
-					String aux = (String) e.nextElement();
-					buffer.append(aux + "=" + params.getProperty(aux) + "&");
-				}
-				content = (buffer.deleteCharAt(buffer.length() - 1)).toString();
-			}
-			else
-				content = "";
-			printout.writeBytes(content);
-			printout.flush();
-			printout.close();
-			if (salida) {
-				// Get response data.
-				System.out.println("Termine :-)");
-				java.io.BufferedReader arch = new java.io.BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-				StringBuffer html = new StringBuffer();
-				String linea = "";
-				while ((linea = arch.readLine()) != null)
-					html.append(linea);
-				arch.close();
-				urlConn.disconnect();
-				return html;
-			}
-			else{
-				urlConn.disconnect();
-				return null;
-			}
-		}
-		catch (MalformedURLException e) {
-			return null;
-		}
-		catch (UnsupportedEncodingException e) {
-			return null;
-		}
-		catch (IOException e) {
-			return null;
-		}
-	}
-	public InputStream sendRequest(Properties params) {
-		URL url;
-		DataOutputStream printout;
-		String content = null;
-		try {
-			url = new URL(sURI);
-			// URL connection channel.
-			HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-			// Dejo saber al run-time que no quiero recibir.
-			urlConn.setDoInput(true);
-			// Dejo saber al run-time que quiero enviar.
-			urlConn.setDoOutput(true);
-			// Desabilito el cache.
-			urlConn.setUseCaches(false);
-			// Especifico el  tipo del contenido.
-			urlConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			// Send POST output.
-			printout = new DataOutputStream(urlConn.getOutputStream());
-			//Extraigo los parametros a enviar
-			if (!params.isEmpty()) {
-				Enumeration e = params.keys();
-				StringBuffer buffer = new StringBuffer();
-				while (e.hasMoreElements()) {
-					String aux = (String) e.nextElement();
-					buffer.append(aux + "=" + params.getProperty(aux) + "&");
-				}
-				content = (buffer.deleteCharAt(buffer.length() - 1)).toString();
-			}
-			else
-				content = "";
-			printout.writeBytes(content);
-			printout.flush();
-			printout.close();
-			// Get response data.
-			System.out.println("Termine :-)");
-			InputStream salida = urlConn.getInputStream();
-//			urlConn.disconnect();
-			return salida;
-		}
-		catch (MalformedURLException e) {
-			return null;
-		}
-		catch (UnsupportedEncodingException e) {
-			return null;
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-/**
- * @author	Daniel Sepulveda
- * Envia un mensaje XML agregando la formalidad necesaria para SOAP
- * @param url: DirecciÛn de destino (usualmente un WebService)
- * @param soapIn: Contenido XML del mensaje SOAP
- * @return Una cadena con la respuesta del WebService
- */	public static String sendSOAPMessage(String url,String soapIn){
-		URL                 aURL;
-		HttpURLConnection   aC;
-		OutputStreamWriter  oS;
-		String              line;
-//		StringBuffer        soap;
-//		byte[]              mensaje;
-		String              xmlInput = "";
-        
-		// se lee el xml de entrada al Webservice
-		/*
-		try {
-			InputStream bIn = in;
-			int aux = bIn.read();
-			while ( aux > 0 ) {
-				xmlInput += (char)aux;
-				aux = bIn.read();
-			}           
-			bIn.close();
-		}
-		catch( Exception e ) {
-			e.printStackTrace();
-			System.exit( 0 );
-		} */                       
-     	xmlInput = soapIn;
-		try {                       
-			aURL = new URL(url);
-			aC = (HttpURLConnection) aURL.openConnection();
-			aC.setDoOutput( true );
-			aC.setDoInput( true );
-			aC.setRequestMethod( "GET" );
-			aC.setUseCaches( false );
-			aC.setAllowUserInteraction( false ); 
-			aC.setRequestProperty( "Content-Length", Integer.toString( xmlInput.length() )
-);  
-			aC.setRequestProperty( "Content-Type", "text/xml; charset=utf-8" );
-			aC.setRequestProperty( "SOAPAction", "" );                
-                        
-			oS = new OutputStreamWriter( aC.getOutputStream() );
-			oS.write( xmlInput );
-			oS.flush();
-			oS.close();
-            
-			InputStream iS = aC.getInputStream();
-			BufferedReader bR = new BufferedReader( new InputStreamReader( iS ) );
-			String salida = "";
-            
-			line = bR.readLine();
-			while( line != null ) {
-				System.out.println( line );
-				salida +=line;
-				line = bR.readLine();
-			}
-			bR.close();
-			return salida;
-		}
-		catch( Exception e ) {
-			e.printStackTrace();
-			System.exit( 0 );
-		}
-		return null;
-	}
+    private URI uri;
+    private Document doc;
+
+    // Un solo HttpClient reutilizable (thread-safe)
+    private final HttpClient http = HttpClient.newBuilder()
+            .version(HttpClient.Version.HTTP_1_1)
+            .connectTimeout(Duration.ofSeconds(20))
+            .build();
+
+    public static String preSOAP = ""
+            + "<SOAP-ENV:Envelope "
+            + "xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" "
+            + "xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" "
+            + "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+            + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
+            + "<SOAP-ENV:Body>";
+
+    public static String postSOAP = ""
+            + "</SOAP-ENV:Body>"
+            + "</SOAP-ENV:Envelope>";
+
+    public HttpConnBean(String serverURI) {
+        this.uri = URI.create(serverURI);
+    }
+
+    /**
+     * Env√≠a un XML y retorna el body como StringBuffer.
+     * (Mantiene firma de retorno tipo StringBuffer para compatibilidad.)
+     */
+    public StringBuffer sendRequest(Document docXml, String encoding) {
+        try {
+            Charset cs = encoding != null ? Charset.forName(encoding) : StandardCharsets.UTF_8;
+            String body = postXmlForText(docXml, cs);
+            return body != null ? new StringBuffer(body) : null;
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Env√≠a el this.doc y retorna un Document parseado desde la respuesta.
+     */
+    public Document sendXML() {
+        try {
+            return postXmlForDocument(this.doc, StandardCharsets.UTF_8);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Carga un Document desde archivo (sin Xerces, solo JAXP).
+     */
+    public void load(String archivoXml) {
+        try (InputStream is = new FileInputStream(archivoXml)) {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            dbf.setNamespaceAware(true);
+            // Si quieres validar contra XSD, agrega: dbf.setSchema(schema);
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            this.doc = db.parse(is);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * HTTPS ya es soportado autom√°ticamente por HttpClient.
+     * Mantengo el m√©todo por compatibilidad, delega a sendXML().
+     */
+    @Deprecated
+    public void sendXMLHttps() {
+        Document ignored = sendXML();
+        if (ignored != null) {
+            try {
+                System.out.println(documentToString(ignored, StandardCharsets.UTF_8));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Env√≠a un XML y retorna el Document de respuesta. Lanza tu MsgException custom.
+     */
+    public Document sendXML(Document docXml, String encoding) throws MsgException {
+        try {
+            Charset cs = encoding != null ? Charset.forName(encoding) : StandardCharsets.UTF_8;
+            Document out = postXmlForDocument(docXml, cs);
+            System.out.println("\rXml enviado a: " + uri);
+            return out;
+        } catch (Throwable e) {
+            throw new MsgException("Clase: HttpConnBean - Error al enviar el mensaje: " + e.getMessage());
+        }
+    }
+
+    /**
+     * POST application/x-www-form-urlencoded, leyendo respuesta.
+     * (Sigue retornando StringBuffer para no romper llamadas existentes.)
+     */
+    public StringBuffer sendPost(Properties params) {
+        try {
+            String form = encodeForm(params, StandardCharsets.UTF_8);
+            HttpRequest req = HttpRequest.newBuilder(uri)
+                    .timeout(Duration.ofSeconds(60))
+                    .header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+                    .POST(HttpRequest.BodyPublishers.ofString(form, StandardCharsets.UTF_8))
+                    .build();
+            HttpResponse<String> resp = http.send(req, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+            return new StringBuffer(resp.body());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Igual a sendPost, pero opcionalmente no lee respuesta.
+     */
+    public StringBuffer sendPost(Properties params, boolean salida) {
+        try {
+            String form = encodeForm(params, StandardCharsets.UTF_8);
+            HttpRequest req = HttpRequest.newBuilder(uri)
+                    .timeout(Duration.ofSeconds(60))
+                    .header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+                    .POST(HttpRequest.BodyPublishers.ofString(form, StandardCharsets.UTF_8))
+                    .build();
+
+            if (!salida) {
+                http.send(req, HttpResponse.BodyHandlers.discarding());
+                return null;
+            } else {
+                HttpResponse<String> resp = http.send(req, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+                return new StringBuffer(resp.body());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Devuelve un InputStream de la respuesta (el caller debe cerrarlo).
+     */
+    public InputStream sendRequest(Properties params) {
+        try {
+            String form = encodeForm(params, StandardCharsets.UTF_8);
+            HttpRequest req = HttpRequest.newBuilder(uri)
+                    .timeout(Duration.ofSeconds(60))
+                    .header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+                    .POST(HttpRequest.BodyPublishers.ofString(form, StandardCharsets.UTF_8))
+                    .build();
+            HttpResponse<InputStream> resp = http.send(req, HttpResponse.BodyHandlers.ofInputStream());
+            // OJO: el caller es responsable de cerrar este InputStream
+            return resp.body();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /** Setter de URI (compatibilidad con tu API anterior). */
+    public void setSURI(String sURI) {
+        this.uri = URI.create(sURI);
+    }
+
+    /**
+     * Envia un mensaje SOAP por POST. Corrige el m√©todo (antes era GET).
+     */
+    public static String sendSOAPMessage(String url, String soapIn) {
+        try {
+            HttpClient http = HttpClient.newBuilder()
+                    .version(HttpClient.Version.HTTP_1_1)
+                    .connectTimeout(Duration.ofSeconds(20))
+                    .build();
+
+            Charset cs = StandardCharsets.UTF_8;
+            HttpRequest req = HttpRequest.newBuilder(URI.create(url))
+                    .timeout(Duration.ofSeconds(120))
+                    .header("Content-Type", "text/xml; charset=" + cs.name())
+                    .header("SOAPAction", "") // ajusta si tu WS requiere un valor espec√≠fico
+                    .POST(HttpRequest.BodyPublishers.ofString(soapIn, cs))
+                    .build();
+
+            HttpResponse<String> resp = http.send(req, HttpResponse.BodyHandlers.ofString(cs));
+            return resp.body();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /* ====================== Helpers internos ====================== */
+
+    private String postXmlForText(Document docXml, Charset cs) throws Exception {
+        String xml = documentToString(docXml, cs);
+        HttpRequest req = HttpRequest.newBuilder(uri)
+                .timeout(Duration.ofSeconds(120))
+                .header("Content-Type", "application/xml; charset=" + cs.name())
+                .header("Accept", "application/xml, text/xml, */*")
+                .POST(HttpRequest.BodyPublishers.ofString(xml, cs))
+                .build();
+        HttpResponse<String> resp = http.send(req, HttpResponse.BodyHandlers.ofString(cs));
+        return resp.body();
+    }
+
+    private Document postXmlForDocument(Document docXml, Charset cs) throws Exception {
+        String xml = documentToString(docXml, cs);
+        HttpRequest req = HttpRequest.newBuilder(uri)
+                .timeout(Duration.ofSeconds(120))
+                .header("Content-Type", "application/xml; charset=" + cs.name())
+                .header("Accept", "application/xml, text/xml, */*")
+                .POST(HttpRequest.BodyPublishers.ofString(xml, cs))
+                .build();
+
+        HttpResponse<InputStream> resp = http.send(req, HttpResponse.BodyHandlers.ofInputStream());
+        try (InputStream is = resp.body()) {
+            return parseXml(is);
+        }
+    }
+
+    private static String documentToString(Document doc, Charset charset) throws Exception {
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer t = tf.newTransformer();
+        t.setOutputProperty(OutputKeys.ENCODING, charset.name());
+        t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+        t.setOutputProperty(OutputKeys.METHOD, "xml");
+        t.setOutputProperty(OutputKeys.INDENT, "no");
+        StringWriter sw = new StringWriter();
+        t.transform(new DOMSource(doc), new StreamResult(sw));
+        return sw.toString();
+    }
+
+    private static Document parseXml(InputStream in) throws Exception {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(true);
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        return db.parse(in);
+    }
+
+    private static String encodeForm(Properties params, Charset cs) throws UnsupportedEncodingException {
+        if (params == null || params.isEmpty()) return "";
+        StringJoiner joiner = new StringJoiner("&");
+        Enumeration<?> e = params.propertyNames();
+        while (e.hasMoreElements()) {
+            String key = (String) e.nextElement();
+            String val = params.getProperty(key, "");
+            joiner.add(URLEncoder.encode(key, cs.name()) + "=" + URLEncoder.encode(val, cs.name()));
+        }
+        return joiner.toString();
+    }
+
+    /* Demo simple (opcional): */
+    public static void main(String[] args) {
+        try {
+            Properties parametros = new Properties();
+            parametros.put("firstname", "Leo");
+            parametros.put("lastname", "Pino");
+
+            HttpConnBean a = new HttpConnBean(args[0]);
+            System.out.println(a.sendPost(parametros, true));
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
 }
