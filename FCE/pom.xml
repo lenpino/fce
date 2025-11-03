@@ -3,17 +3,19 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.example</groupId>
-	<artifactId>fce</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<!-- Cambios principales aquí -->
+	<groupId>fce</groupId>
+	<artifactId>servicios</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging> <!-- Cambiar de war a jar -->
 
-	<name>FCE</name>
+	<name>Servicios Library</name>
 
 	<properties>
-		<maven.compiler.release>21</maven.compiler.release>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<fop.version>2.9</fop.version>
+	  <maven.compiler.release>21</maven.compiler.release>
+	  <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+	  <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	  <fop.version>2.9</fop.version>
 	</properties>
 
 	<dependencyManagement>
@@ -29,21 +31,26 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Para una librería, no necesitas servlet-api a menos que sea
+		específicamente requerido -->
+		<!-- Si es necesario, cambia el scope a 'provided' -->
+
 		<dependency>
 			<groupId>jakarta.servlet</groupId>
 			<artifactId>jakarta.servlet-api</artifactId>
 			<version>6.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc11</artifactId>
 			<version>23.7.0.25.01</version>
 		</dependency>
 		<dependency>
-			<groupId>com.ibm.mq</groupId>
-			<artifactId>com.ibm.mq.allclient</artifactId>
-			<version>9.3.5.0</version>
+		  <groupId>com.ibm.mq</groupId>
+		  <artifactId>com.ibm.mq.jakarta.client</artifactId>
+		  <version>9.3.5.0</version>  <!-- o más nuevo, p.ej. 9.4.x -->
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -87,7 +94,6 @@
 	</dependencies>
 
 	<build>
-		<sourceDirectory>FCE/servicios</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -97,20 +103,15 @@
 					<release>21</release>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.4.0</version>
-				<configuration>
-					<warSourceDirectory>FCE/WebContent</warSourceDirectory>
-				</configuration>
-			</plugin>
+		    <!-- (opcional pero recomendable) -->
+		    <plugin>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-resources-plugin</artifactId>
+		      <version>3.3.1</version>
+		      <configuration>
+		        <encoding>${project.build.sourceEncoding}</encoding>
+		      </configuration>
+		    </plugin>
 		</plugins>
-		<resources>
-			<resource>
-				<directory>FCE/META-INF</directory>
-				<targetPath>META-INF</targetPath>
-			</resource>
-		</resources>
 	</build>
 </project>
